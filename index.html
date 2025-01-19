@@ -9,7 +9,71 @@
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
+    
+
 </head>
+
+<style>
+        .container-skill {
+            overflow: hidden;
+            white-space: nowrap;
+            position: relative;
+            width: 100%;
+            background-color: #000000;
+            padding: 20px 0;
+        }
+        .scrolling-row {
+            display: inline-flex;
+            animation: scroll-horizontal 15s linear infinite;
+        }
+        .icon-box {
+            text-align: center;
+            margin: 0 20px;
+        }
+        .icon-box i {
+            font-size: 3rem;
+        }
+        /* Animasi scrolling */
+        @keyframes scroll-horizontal {
+            0% {
+                transform: translateX(100%);
+            }
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+
+        
+    .text-3xl {
+        font-size: 2rem;
+    }
+    .md\:text-4xl {
+        font-size: 2.5rem;
+    }
+    .text-center {
+        text-align: center;
+        margin: 10px 0;
+    }
+    .text-blue-400 {
+        color: #60a5fa;
+    }
+    .text-blue-500 {
+        color: #3b82f6;
+    }
+    .text-red-500 {
+        color: #ef4444;
+    }
+    .text-yellow-400 {
+        color: #facc15;
+    }
+    .text-green-500 {
+        color: #22c55e;
+    }
+    .text-purple-500 {
+        color: #a855f7;
+    }
+</style>
 
 <body>
     <header class="header navbar navbar-expand-lg navbar-dark fixed-top">
@@ -62,6 +126,42 @@
                                 class="bi bi-linkedin"></i></a>
                         <a href="https://github.com/refafatur"><i class="bi bi-github"></i></a>
                     </div>
+
+                    <div class="container-skill">
+                        <div class="scrolling-row">
+                            <div class="icon-box">
+                                <i class="devicon-php-plain text-blue-400"></i>
+                            </div>
+                            <div class="icon-box">
+                                <i class="devicon-laravel-plain text-red-500"></i>
+                            </div>
+                            <div class="icon-box">
+                                <i class="devicon-javascript-plain text-yellow-400"></i>
+                            </div>
+                            <div class="icon-box">
+                                <i class="devicon-nodejs-plain text-green-500"></i>
+                            </div>
+                            <div class="icon-box">
+                                <i class="devicon-mysql-plain text-blue-400"></i>
+                            </div>
+                            <div class="icon-box">
+                                <i class="devicon-firebase-plain text-blue-400"></i>
+                            </div>
+                            <div class="icon-box">
+                                <i class="devicon-flutter-plain text-blue-500"></i>
+                            </div>
+                            <div class="icon-box">
+                                <i class="devicon-android-plain text-blue-500"></i>
+                            </div>
+                            <div class="icon-box">
+                                <i class="devicon-css3-plain text-blue-500"></i>
+                            </div>
+                            <div class="icon-box">
+                                <i class="devicon-bootstrap-plain text-purple-500"></i>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="btn-group">
                         <a href="#contact" class="btn btn-primary">Contact Me</a>
                     </div>
@@ -76,32 +176,40 @@
     </section>
 
     <section class="about" id="about">
-        <div class="container">
+        <div class="container text-center">
             <div class="content-about">
                 <h2>About Me</h2>
-                <p>Halo, saya Muhammad Refa Fatur Rahman, mahasiswa Teknik Informatika semester 5 di Universitas Binaniaga Indonesia. Saya seorang Fullstack Developer dengan keahlian di front-end menggunakan HTML, CSS, dan Bootstrap, serta back-end dengan Express.js dan PHP. Saya juga berpengalaman dalam pengembangan aplikasi mobile menggunakan Flutter dan Firebase. Selain itu, saya menguasai desain grafis dengan Canva, serta JavaScript, Node.js, dan Git untuk kolaborasi tim. Saya berkomitmen untuk terus belajar dan menciptakan solusi digital yang inovatif dan efektif.</p>
+                <p> Halo, saya Muhammad Refa Fatur Rahman, Mahasiswa semester 5 Teknik Informatika di Universitas Binaniaga Indonesia. Saya berfokus pada pengembangan web dan aplikasi mobile sebagai Fullstack Developer, dengan pengalaman mendalam di kedua sisi front-end dan back-end.
+
+                    Saya menguasai teknologi front-end seperti HTML, CSS, dan Bootstrap untuk menciptakan antarmuka yang interaktif, responsif, dan user-friendly. Di sisi back-end, saya berpengalaman menggunakan Express.js dan PHP untuk membangun aplikasi yang efisien dan scalable.
+                    
+                    Selain itu, saya juga berpengalaman dalam pengembangan aplikasi mobile menggunakan Flutter dan pengelolaan backend menggunakan Firebase untuk autentikasi dan penyimpanan data secara real-time. Saya juga memiliki keterampilan dalam desain grafis menggunakan Canva, serta penguasaan JavaScript, Node.js, dan Git untuk mendukung kolaborasi tim dan manajemen proyek. Saya berkomitmen untuk terus belajar dan menghadirkan solusi digital yang relevan, inovatif, dan efektif dalam setiap proyek yang saya kerjakan.</p>
             </div>
         </div>
     </section>
     <section class="project" id="project">
-        <div class="container-fluid">
+        <div class="container-fluid text-center">
             <h2 class="mb-5">My Project</h2>
             <div class="row justify-content-center">
                 <div class="col-md-8 col-lg-5 mb-4">
                     <div class="card h-100">
                         <img src="image/BEM.jpg" class="card-img-top" alt="Project 1">
                         <div class="card-body">
-                            <h5 class="card-title" click="https://github.com/refafatur/bem">WEBSITE BEM KM UNBIN</h5>
-                            <p class="card-text">BEM KM UNBIN adalah platform resmi Badan Eksekutif Mahasiswa Keluarga Mahasiswa Universitas Binaniaga Indonesia yang dirancang untuk:
-                                Menyampaikan Informasi
-                                Sebagai pusat informasi mengenai program kerja, kegiatan, dan kebijakan BEM KM UNBIN.
-                                Mendekatkan Mahasiswa
-                                Menjadi jembatan antara mahasiswa, BEM, dan pihak universitas untuk berkolaborasi dalam menciptakan perubahan yang positif.
-                                Menjadi Wadah Inspirasi
-                                Menyediakan artikel, dokumentasi kegiatan, dan cerita sukses mahasiswa yang memotivasi.
-                                Membangun Interaksi
-                                Mempermudah komunikasi melalui fitur kontak, FAQ, dan kolom saran untuk seluruh civitas akademika.</p>
-                                <a href="https://github.com/refafatur/bem" class="btn btn-primary" target="_blank">Visit Website</a>
+                            <h5 class="card-title">
+                                WEBSITE BEM KM UNBIN
+                            </h5>
+                            <p class="card-text" id="bem-description">
+                                BEM KM UNBIN adalah platform resmi Badan Eksekutif Mahasiswa Keluarga Mahasiswa Universitas Binaniaga Indonesia yang dirancang untuk:
+
+                                <span id="more-content" style="display: none;">
+                                    Menyampaikan Informasi, menjadi pusat informasi mengenai program kerja, kegiatan, dan kebijakan BEM KM UNBIN.
+                                    Mendekatkan Mahasiswa: Menjadi jembatan antara mahasiswa, BEM, dan pihak universitas untuk berkolaborasi dalam menciptakan perubahan yang positif.
+                                    Menjadi Wadah Inspirasi: Menyediakan artikel, dokumentasi kegiatan, dan cerita sukses mahasiswa yang memotivasi.
+                                    Membangun Interaksi: Mempermudah komunikasi melalui fitur kontak, FAQ, dan kolom saran untuk seluruh civitas akademika.
+                                </span>
+                            </p>
+                            <button id="read-more-btn" class="btn btn-secondary">Read More</button>
+                            <a href="https://github.com/refafatur/bem" class="btn btn-primary mt-2" target="_blank">Visit Website</a>
                         </div>
                     </div>
                 </div>
@@ -110,138 +218,73 @@
                         <img src="image/Aplikasi Keluhan.jpg" class="card-img-top" alt="Project 2">
                         <div class="card-body">
                             <h5 class="card-title">Aplikasi Keluhan</h5>
-                            <p class="card-text">Aplikasi Keluhan SD adalah perangkat lunak yang dirancang khusus untuk menangani keluhan atau masukan yang berkaitan dengan lingkungan sekolah dasar (SD). Aplikasi ini memfasilitasi komunikasi antara siswa, orang tua, guru, dan pihak sekolah untuk menyampaikan dan menangani keluhan dengan cara yang lebih terorganisir.</p>
+                            <p class="card-text">Aplikasi Keluhan SD adalah perangkat lunak yang dirancang khusus untuk:menangani keluhan atau masukan yang berkaitan dengan lingkungan sekolah dasar (SD). Aplikasi ini memfasilitasi komunikasi antara siswa, orang tua, guru, dan pihak sekolah untuk menyampaikan dan menangani keluhan dengan cara yang lebih terorganisir.</p>
                             <a href="https://github.com/refafatur/kasbon" class="btn btn-primary" target="_blank">Visit Website</a>
                         </div>
                     </div>
                 </div>
-                <!-- <div class="col-md-8 col-lg-5 mb-4">
-                    <div class="card h-100">
-                        <img src="image/" class="card-img-top" alt="Project 3">
-                        <div class="card-body">
-                            <h5 class="card-title">Chillax</h5>
-                            <p class="card-text">Website Relaksasi</p>
-                        </div>
-                    </div>
-                </div>
+
                 <div class="col-md-8 col-lg-5 mb-4">
                     <div class="card h-100">
-                        <img src="image/" class="card-img-top" alt="Project 4">
+                        <img src="image/Jobcom.jpg" class="card-img-top" alt="Project 2">
                         <div class="card-body">
-                            <h5 class="card-title">ThriftHunt</h5>
-                            <p class="card-text">Toko Online Pakaian Vintage</p>
+                            <h5 class="card-title">Aplikasi Jobcom</h5>
+                            <p class="card-text">Jobcom adalah platform digital yang dirancang untuk memudahkan proses rekrutmen dan pencarian kerja secara efisien. Aplikasi ini berfungsi sebagai jembatan antara pencari kerja dan pembuat lowongan kerja, menyediakan fitur-fitur yang mendukung interaksi langsung antara kedua pihak. Dengan antarmuka yang intuitif dan proses yang terintegrasi, Jobcom bertujuan untuk menghubungkan pencari kerja dengan peluang karier yang sesuai dan membantu perusahaan menemukan kandidat terbaik.
+                            </p>
+                            <a href="https://github.com/refafatur/jobcom" class="btn btn-primary" target="_blank">Visit Website</a>
                         </div>
                     </div>
-                </div> -->
-                <!-- <div id="posterCarousel" class="carousel slide mt-5" data-bs-ride="carousel">
-                    <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <div class="row justify-content-center">
-                                <div class="col-4 col-md-4 col-lg-2 mb-3">
-                                    <img src="image/1.png" class="d-block w-100 poster-img" alt="Poster Project 1">
-                                </div>
-                                <div class="col-4 col-md-4 col-lg-2 mb-3">
-                                    <img src="image/2.png" class="d-block w-100 poster-img" alt="Poster Project 2">
-                                </div>
-                                <div class="col-4 col-md-4 col-lg-2 mb-3">
-                                    <img src="image/3.png" class="d-block w-100 poster-img" alt="Poster Project 3">
-                                </div>
-                                <div class="col-4 col-md-4 col-lg-2 mb-3">
-                                    <img src="image/4.png" class="d-block w-100 poster-img" alt="Poster Project 4">
-                                </div>
-                                <div class="col-4 col-md-4 col-lg-2 mb-3">
-                                    <img src="image/5.png" class="d-block w-100 poster-img" alt="Poster Project 5">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <div class="row justify-content-center">
-                                <div class="col-4 col-md-4 col-lg-2 mb-3">
-                                    <img src="image/6.png" class="d-block w-100 poster-img" alt="Poster Project 6">
-                                </div>
-                                <div class="col-4 col-md-4 col-lg-2 mb-3">
-                                    <img src="image/7.png" class="d-block w-100 poster-img" alt="Poster Project 7">
-                                </div>
-                                <div class="col-4 col-md-4 col-lg-2 mb-3">
-                                    <img src="image/8.png" class="d-block w-100 poster-img" alt="Poster Project 8">
-                                </div>
-                                <div class="col-4 col-md-4 col-lg-2 mb-3">
-                                    <img src="image/9.png" class="d-block w-100 poster-img" alt="Poster Project 9">
-                                </div>
-                                <div class="col-4 col-md-4 col-lg-2 mb-3">
-                                    <img src="image/10.jpg" class="d-block w-100 poster-img" alt="Poster Project 10">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <button class="carousel-control-prev" type="button" data-bs-target="#posterCarousel"
-                        data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Previous</span>
-                    </button>
-
-                    <button class="carousel-control-next" type="button" data-bs-target="#posterCarousel"
-                        data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Next</span>
-                    </button>
                 </div>
-            </div> -->
+
     </section>
     <section class="skill" id="skill">
-        <div class="container">
+        <div class="container text-center">
             <h2>My Skills</h2>
-            <div class="container-skill">
-                <div class="row justify-content-center">
-                    <div class="col-md-3 col-sm-6">
-                        <div class="card text-center">
-                            <div class="card-body">
-                                <img src="image/html.jpg" class="img-fluid skill-icon">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-sm-6">
-                        <div class="card text-center">
-                            <div class="card-body">
-                                <img src="image/css.jpg" class="img-fluid skill-icon">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-sm-6">
-                        <div class="card text-center">
-                            <div class="card-body">
-                                <img src="image/logojs.jpeg" class="img-fluid skill-icon">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-sm-6">
-                        <div class="card text-center">
-                            <div class="card-body">
-                                <img src="image/php.jpg" class="img-fluid skill-icon">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-sm-6">
-                        <div class="card text-center">
-                            <div class="card-body">
-                                <img src="image/mysql.jpg" class="img-fluid skill-icon">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-sm-6">
-                        <div class="card text-center">
-                            <div class="card-body">
-                                <img src="image/canva.jpg" class="img-fluid skill-icon">
-                            </div>
-                        </div>
-                    </div>
-
+            <div class="row" style="display: flex; flex-wrap: wrap; gap: 2rem; justify-content: center;">
+                <div class="card" style="text-align: center; padding: 20px; width: 150px;">
+                    <i class="devicon-php-plain text-blue-400" style="font-size: 4rem;"></i>
+                    <p class="card-title" style="margin-top: 10px;">PHP</p>
+                </div>
+                <div class="card" style="text-align: center; padding: 20px; width: 150px;">
+                    <i class="devicon-laravel-plain text-red-500" style="font-size: 4rem;"></i>
+                    <p class="card-title" style="margin-top: 10px;">Laravel</p>
+                </div>
+                <div class="card" style="text-align: center; padding: 20px; width: 150px;">
+                    <i class="devicon-javascript-plain text-yellow-400" style="font-size: 4rem;"></i>
+                    <p class="card-title" style="margin-top: 10px;">JavaScript</p>
+                </div>
+                <div class="card" style="text-align: center; padding: 20px; width: 150px;">
+                    <i class="devicon-nodejs-plain text-green-500" style="font-size: 4rem;"></i>
+                    <p class="card-title" style="margin-top: 10px;">Node.js</p>
+                </div>
+                <div class="card" style="text-align: center; padding: 20px; width: 150px;">
+                    <i class="devicon-mysql-plain text-blue-400" style="font-size: 4rem;"></i>
+                    <p class="card-title" style="margin-top: 10px;">MySQL</p>
+                </div>
+                <div class="card" style="text-align: center; padding: 20px; width: 150px;">
+                    <i class="devicon-firebase-plain text-blue-400" style="font-size: 4rem;"></i>
+                    <p class="card-title" style="margin-top: 10px;">Firebase</p>
+                </div>
+                <div class="card" style="text-align: center; padding: 20px; width: 150px;">
+                    <i class="devicon-flutter-plain text-blue-500" style="font-size: 4rem;"></i>
+                    <p class="card-title" style="margin-top: 10px;">Flutter</p>
+                </div>
+                <div class="card" style="text-align: center; padding: 20px; width: 150px;">
+                    <i class="devicon-android-plain text-blue-500" style="font-size: 4rem;"></i>
+                    <p class="card-title" style="margin-top: 10px;">Android</p>
+                </div>
+                <div class="card" style="text-align: center; padding: 20px; width: 150px;">
+                    <i class="devicon-css3-plain text-blue-500" style="font-size: 4rem;"></i>
+                    <p class="card-title" style="margin-top: 10px;">CSS</p>
+                </div>
+                <div class="card" style="text-align: center; padding: 20px; width: 150px;">
+                    <i class="devicon-bootstrap-plain text-purple-500" style="font-size: 4rem;"></i>
+                    <p class="card-title" style="margin-top: 10px;">Bootstrap</p>
                 </div>
             </div>
         </div>
     </section>
-
+    
     <section id="contact" class="contact">
         <div class="container text-center">
             <h2>Contact Me</h2>
@@ -275,7 +318,7 @@
     <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <!-- <script src="script.js"></script> -->
+    <script src="script.js"></script>
 </body>
 
 </html>
