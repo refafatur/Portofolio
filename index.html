@@ -412,112 +412,6 @@
     </section>
 
     <section id="contact" class="contact" data-aos="fade-up">
-        <div class="container text-center">
-            <h2>AI Assistent</h2>
-            <h3 class="mb-4">
-                Have a question or need assistance? Chat with my AI assistant below!
-            </h3>
-            <div class="text-center" style="max-width:1000px;margin:auto;">
-                <div id="ai-chat-box" style="border:1px solid #ddd;border-radius:10px;padding:20px;min-height:200px;max-height:300px;overflow-y:auto;background:#fafafa;margin-bottom:15px;text-align:left;"></div>
-                <form id="ai-chat-form" autocomplete="off" style="display:flex;gap:10px;">
-                    <input type="text" id="ai-chat-input" class="form-control" placeholder="Type your message..." required />
-                    <button type="submit" class="btn btn-primary">Send</button>
-                </form>
-            </div>
-        </div>
-    </section>
-    <script>
-        // Gemini API key (replace with your own key)
-        const GEMINI_API_KEY = "AIzaSyD1uGyM6rjCvwvXM6O1ndlQ8VFS1YmrRoE";
-
-        const chatBox = document.getElementById('ai-chat-box');
-        const chatForm = document.getElementById('ai-chat-form');
-        const chatInput = document.getElementById('ai-chat-input');
-
-        // Image URLs
-        const userImg = "image/refa.jpeg";
-        const aiImg = "image/logo.png";
-
-        // Conversation history for context
-        let conversation = [];
-
-        function appendMessage(sender, text) {
-            const msgDiv = document.createElement('div');
-            msgDiv.style.margin = '10px 0';
-            msgDiv.style.display = 'flex';
-            msgDiv.style.alignItems = 'flex-start';
-
-            const fontSize = '1.35rem'; // Increased font size
-
-            if (sender === 'You') {
-                msgDiv.style.justifyContent = 'flex-end';
-                msgDiv.innerHTML = `
-                    <span style="background:#3b82f6;color:#fff;padding:8px 16px;border-radius:16px 0 16px 16px;max-width:70%;display:inline-block;text-align:right;font-size:${fontSize};">
-                        ${text}
-                    </span>
-                    <img src="${userImg}" alt="User" style="width:40px;height:40px;border-radius:50%;margin-left:10px;object-fit:cover;">
-                `;
-            } else {
-                msgDiv.style.justifyContent = 'flex-start';
-                msgDiv.innerHTML = `
-                    <img src="${aiImg}" alt="AI" style="width:40px;height:40px;border-radius:50%;margin-right:10px;object-fit:cover;">
-                    <span style="background:#e5e7eb;color:#222;padding:8px 16px;border-radius:0 16px 16px 16px;max-width:70%;display:inline-block;text-align:left;font-size:${fontSize};">
-                        ${text}
-                    </span>
-                `;
-            }
-            chatBox.appendChild(msgDiv);
-            chatBox.scrollTop = chatBox.scrollHeight;
-        }
-
-        async function getGeminiReply(userMsg) {
-            // Add user message to conversation
-            conversation.push({ role: "user", parts: [{ text: userMsg }] });
-
-            // Prepare context for Gemini
-            const contents = conversation.map(msg => ({
-                role: msg.role,
-                parts: msg.parts
-            }));
-
-            const url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=" + GEMINI_API_KEY;
-            const body = { contents };
-
-            try {
-                const res = await fetch(url, {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify(body)
-                });
-                const data = await res.json();
-                if (data && data.candidates && data.candidates[0] && data.candidates[0].content && data.candidates[0].content.parts[0].text) {
-                    // Add AI reply to conversation
-                    conversation.push({ role: "model", parts: [{ text: data.candidates[0].content.parts[0].text }] });
-                    return data.candidates[0].content.parts[0].text.replace(/\*\*/g, "");
-                } else {
-                    return "Maaf, saya tidak bisa mendapatkan respon dari AI.";
-                }
-            } catch (err) {
-                return "Maaf, terjadi kesalahan saat menghubungkan ke Gemini API.";
-            }
-        }
-
-        chatForm.addEventListener('submit', async function(e) {
-            e.preventDefault();
-            const userMsg = chatInput.value.trim();
-            if (!userMsg) return;
-            appendMessage('You', userMsg);
-            chatInput.value = '';
-            appendMessage('', 'Typing...');
-            const aiReply = await getGeminiReply(userMsg);
-            // Remove "Typing..." message
-            const lastMsg = chatBox.querySelectorAll('div');
-            if (lastMsg.length) lastMsg[lastMsg.length - 1].remove();
-            appendMessage('', aiReply);
-        });
-    </script>
-
-    <section id="contact" class="contact" data-aos="fade-up">
       <div class="container text-center">
         <h2>Contact Me</h2>
         <h3 class="mb-4">
@@ -561,6 +455,210 @@
         </div>
       </div>
     </footer>
+        <!-- Bubble Chat Floating Button & Box -->
+    <style>
+      #bubble-chat-btn {
+        position: fixed;
+        right: 32px;
+        bottom: 32px;
+        z-index: 9999;
+        background: #3b82f6;
+        color: #fff;
+        border-radius: 50%;
+        width: 60px;
+        height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+        cursor: pointer;
+        font-size: 2rem;
+        border: none;
+      }
+      #bubble-chat-box {
+        position: fixed;
+        right: 32px;
+        bottom: 100px;
+        z-index: 9999;
+        width: 350px;
+        max-width: 95vw;
+        background: #fff;
+        border-radius: 16px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
+        border: 1px solid #ddd;
+        display: none;
+        flex-direction: column;
+        overflow: hidden;
+      }
+      #bubble-chat-header {
+        background: #3b82f6;
+        color: #fff;
+        padding: 12px 20px;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      #bubble-chat-close {
+        background: none;
+        border: none;
+        color: #fff;
+        font-size: 1.5rem;
+        cursor: pointer;
+      }
+      #bubble-chat-content {
+        padding: 16px;
+        min-height: 180px;
+        max-height: 260px;
+        overflow-y: auto;
+        background: #fafafa;
+        text-align: left;
+      }
+      #bubble-chat-form {
+        display: flex;
+        gap: 8px;
+        padding: 12px 16px;
+        border-top: 1px solid #eee;
+        background: #fff;
+      }
+      #bubble-chat-input {
+        flex: 1;
+        border-radius: 8px;
+        border: 1px solid #ddd;
+        padding: 8px 12px;
+      }
+      @media (max-width: 500px) {
+        #bubble-chat-box {
+          right: 8px;
+          width: 98vw;
+        }
+        #bubble-chat-btn {
+          right: 8px;
+        }
+      }
+    </style>
+    <button id="bubble-chat-btn" title="Chat AI">
+      <i class="bi bi-chat-dots"></i>
+    </button>
+    <div id="bubble-chat-box">
+      <div id="bubble-chat-header">
+        AI Assistant
+        <button id="bubble-chat-close">&times;</button>
+      </div>
+      <div id="bubble-chat-content"></div>
+      <form id="bubble-chat-form" autocomplete="off">
+        <input
+          type="text"
+          id="bubble-chat-input"
+          placeholder="Type your message..."
+          required
+        />
+        <button type="submit" class="btn btn-primary">Send</button>
+      </form>
+    </div>
+    <script>
+      // Gemini API key (replace with your own key)
+      const GEMINI_API_KEY = "AIzaSyD1uGyM6rjCvwvXM6O1ndlQ8VFS1YmrRoE";
+      // Bubble chat elements
+      const bubbleBtn = document.getElementById("bubble-chat-btn");
+      const bubbleBox = document.getElementById("bubble-chat-box");
+      const bubbleClose = document.getElementById("bubble-chat-close");
+      const bubbleContent = document.getElementById("bubble-chat-content");
+      const bubbleForm = document.getElementById("bubble-chat-form");
+      const bubbleInput = document.getElementById("bubble-chat-input");
+      // Image URLs
+      const userImg = "image/refa.jpeg";
+      const aiImg = "image/logo.png";
+      let conversation = [];
+      function appendBubbleMessage(sender, text) {
+        const msgDiv = document.createElement("div");
+        msgDiv.style.margin = "10px 0";
+        msgDiv.style.display = "flex";
+        msgDiv.style.alignItems = "flex-start";
+        const fontSize = "1.15rem";
+        if (sender === "You") {
+          msgDiv.style.justifyContent = "flex-end";
+          msgDiv.innerHTML = `
+        <span style="background:#3b82f6;color:#fff;padding:8px 16px;border-radius:16px 0 16px 16px;max-width:70%;display:inline-block;text-align:right;font-size:${fontSize};">
+          ${text}
+        </span>
+        <img src="${userImg}" alt="User" style="width:32px;height:32px;border-radius:50%;margin-left:8px;object-fit:cover;">
+      `;
+        } else {
+          msgDiv.style.justifyContent = "flex-start";
+          msgDiv.innerHTML = `
+        <img src="${aiImg}" alt="AI" style="width:32px;height:32px;border-radius:50%;margin-right:8px;object-fit:cover;">
+        <span style="background:#e5e7eb;color:#222;padding:8px 16px;border-radius:0 16px 16px 16px;max-width:70%;display:inline-block;text-align:left;font-size:${fontSize};">
+          ${text}
+        </span>
+      `;
+        }
+        bubbleContent.appendChild(msgDiv);
+        bubbleContent.scrollTop = bubbleContent.scrollHeight;
+      }
+      async function getGeminiReply(userMsg) {
+        conversation.push({ role: "user", parts: [{ text: userMsg }] });
+        const contents = conversation.map((msg) => ({
+          role: msg.role,
+          parts: msg.parts,
+        }));
+        const url =
+          "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=" +
+          GEMINI_API_KEY;
+        const body = { contents };
+        try {
+          const res = await fetch(url, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(body),
+          });
+          const data = await res.json();
+          if (
+            data &&
+            data.candidates &&
+            data.candidates[0] &&
+            data.candidates[0].content &&
+            data.candidates[0].content.parts[0].text
+          ) {
+            conversation.push({
+              role: "model",
+              parts: [{ text: data.candidates[0].content.parts[0].text }],
+            });
+            return data.candidates[0].content.parts[0].text.replace(
+              /\*\*/g,
+              ""
+            );
+          } else {
+            return "Maaf, saya tidak bisa mendapatkan respon dari AI.";
+          }
+        } catch (err) {
+          return "Maaf, terjadi kesalahan saat menghubungkan ke Gemini API.";
+        }
+      }
+      bubbleBtn.onclick = function () {
+        bubbleBox.style.display = "flex";
+        bubbleBtn.style.display = "none";
+        bubbleInput.focus();
+      };
+      bubbleClose.onclick = function () {
+        bubbleBox.style.display = "none";
+        bubbleBtn.style.display = "flex";
+      };
+      bubbleForm.addEventListener("submit", async function (e) {
+        e.preventDefault();
+        const userMsg = bubbleInput.value.trim();
+        if (!userMsg) return;
+        appendBubbleMessage("You", userMsg);
+        bubbleInput.value = "";
+        appendBubbleMessage("", "Typing...");
+        const aiReply = await getGeminiReply(userMsg);
+        // Remove "Typing..." message
+        const lastMsg = bubbleContent.querySelectorAll("div");
+        if (lastMsg.length) lastMsg[lastMsg.length - 1].remove();
+        appendBubbleMessage("", aiReply);
+      });
+    </script>
+    
     <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -670,3 +768,4 @@
     <script src="script-navbar-hide.js"></script>
   </body>
 </html>
+
