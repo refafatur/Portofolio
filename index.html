@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -455,7 +455,7 @@
         </div>
       </div>
     </footer>
-        <!-- Bubble Chat Floating Button & Box -->
+    <!-- Bubble Chat Floating Button & Box -->
     <style>
       #bubble-chat-btn {
         position: fixed;
@@ -626,7 +626,7 @@
             });
             return data.candidates[0].content.parts[0].text.replace(
               /\*\*/g,
-              ""
+              "",
             );
           } else {
             return "Maaf, saya tidak bisa mendapatkan respon dari AI.";
@@ -658,7 +658,7 @@
         appendBubbleMessage("", aiReply);
       });
     </script>
-    
+
     <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -670,12 +670,21 @@
       const supabaseUrl = "https://swsqdksyabjbafmuxljx.supabase.co";
       const supabaseKey =
         "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InN3c3Fka3N5YWJqYmFmbXV4bGp4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTYxODU2MDEsImV4cCI6MjA3MTc2MTYwMX0.P1vKqCAkQD5F9O5mBqph0z-eyJ508I8-lOJs_0muchk";
-      const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
+      const supabaseClient = window.supabase.createClient(
+        supabaseUrl,
+        supabaseKey,
+      );
 
       // Fetch and render Projects (tbl_project)
       async function loadProjects() {
-        const { data, error } = await supabase.from("tbl_project").select("*");
-        if (error) return;
+        const { data, error } = await supabaseClient
+          .from("tbl_project")
+          .select("*");
+        console.log("Projects - Data:", data, "Error:", error);
+        if (error) {
+          console.error("Error loading projects:", error);
+          return;
+        }
         const container = document.getElementById("project-list");
         container.innerHTML = "";
         data.forEach((project) => {
@@ -696,8 +705,14 @@
 
       // Fetch and render Gallery (tbl_galeris)
       async function loadGallery() {
-        const { data, error } = await supabase.from("tbl_galeris").select("*");
-        if (error) return;
+        const { data, error } = await supabaseClient
+          .from("tbl_galeris")
+          .select("*");
+        console.log("Gallery - Data:", data, "Error:", error);
+        if (error) {
+          console.error("Error loading gallery:", error);
+          return;
+        }
         const container = document.getElementById("random-gallery");
         container.innerHTML = "";
         data.forEach((img) => {
@@ -712,9 +727,10 @@
 
       // Fetch and render Certificates (tbl_certificates)
       async function loadCertificates() {
-        const { data, error } = await supabase
+        const { data, error } = await supabaseClient
           .from("tbl_certificates")
           .select("*");
+        console.log("Certificates - Data:", data, "Error:", error);
         const container = document.getElementById("certificate-list");
         container.innerHTML = "";
         if (error || !data || data.length === 0) {
@@ -736,6 +752,7 @@
 
       // Call all loaders on page load
       document.addEventListener("DOMContentLoaded", () => {
+        console.log("DOMContentLoaded fired - Loading data...");
         loadProjects();
         loadCertificates();
         loadGallery();
@@ -768,5 +785,3 @@
     <script src="script-navbar-hide.js"></script>
   </body>
 </html>
-
-

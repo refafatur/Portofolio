@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -64,11 +64,27 @@
       const SUPABASE_URL = "https://swsqdksyabjbafmuxljx.supabase.co";
       const SUPABASE_KEY =
         "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InN3c3Fka3N5YWJqYmFmbXV4bGp4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTYxODU2MDEsImV4cCI6MjA3MTc2MTYwMX0.P1vKqCAkQD5F9O5mBqph0z-eyJ508I8-lOJs_0muchk";
-      const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+      const supabaseClient = window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY,
+      );
+
+      let isSubmitting = false; // Prevent double submission
+
       document
         .getElementById("adminRegisterForm")
         .addEventListener("submit", async function (e) {
           e.preventDefault();
+
+          // Prevent double submission
+          if (isSubmitting) return;
+          isSubmitting = true;
+
+          const submitBtn = this.querySelector("button[type='submit']");
+          const originalBtnText = submitBtn.textContent;
+          submitBtn.disabled = true;
+          submitBtn.textContent = "Loading...";
+
           const name = document.getElementById("registerName").value;
           const email = document.getElementById("registerEmail").value;
           const password = document.getElementById("registerPassword").value;
@@ -79,7 +95,7 @@
             const data = encoder.encode(password);
             const hashBuffer = await window.crypto.subtle.digest(
               "SHA-256",
-              data
+              data,
             );
             const hashArray = Array.from(new Uint8Array(hashBuffer));
             return hashArray
@@ -87,15 +103,21 @@
               .join("");
           }
 
-          // Register ke Supabase Auth
-          const { data, error } = await supabaseClient.auth.signUp({
-            email,
-            password,
-          });
-          if (error) {
-            document.getElementById("registerError").textContent =
-              error.message;
-          } else {
+          try {
+            // Register ke Supabase Auth
+            const { data, error } = await supabaseClient.auth.signUp({
+              email,
+              password,
+            });
+            if (error) {
+              document.getElementById("registerError").textContent =
+                error.message;
+              isSubmitting = false;
+              submitBtn.disabled = false;
+              submitBtn.textContent = originalBtnText;
+              return;
+            }
+
             // Hash password dan simpan ke tbl_users hanya jika user sudah terdaftar
             const hashedPassword = await hashPassword(password);
             const { error: insertError } = await supabaseClient
@@ -105,16 +127,26 @@
               document.getElementById("registerError").textContent =
                 "Register Auth success, tapi gagal simpan ke database: " +
                 insertError.message;
+              isSubmitting = false;
+              submitBtn.disabled = false;
+              submitBtn.textContent = originalBtnText;
             } else {
               document.getElementById("registerError").textContent = "";
               Swal.fire(
                 "Register Success",
                 "Please check your email to verify your account.",
-                "success"
+                "success",
               ).then(() => {
                 window.location.href = "login.html";
               });
             }
+          } catch (err) {
+            console.error("Register error:", err);
+            document.getElementById("registerError").textContent =
+              "Terjadi kesalahan. Silakan coba lagi.";
+            isSubmitting = false;
+            submitBtn.disabled = false;
+            submitBtn.textContent = originalBtnText;
           }
         });
     </script>
