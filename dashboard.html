@@ -1,416 +1,367 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Dashboard Admin</title>
-    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" />
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js/dist/umd/supabase.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <link rel="icon" href="image/logo.png" type="image/x-icon" />
-    <link rel="stylesheet" href="dashboard/css/dashboard.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
-    />
-  </head>
-  <body>
-    <!-- Tombol toggle sidebar di luar sidemenu, hanya tampil di layar kecil -->
-    <button
-      id="sidebarToggleBtn"
-      class="sidebar-toggle-btn"
-      title="Tampilkan/ Sembunyikan Menu"
-    >
-      <i class="bi bi-list"></i>
-    </button>
-    <div class="dashboard-hr-container">
-      <aside class="dashboard-sidebar" id="dashboardSidebar">
-        <div class="sidebar-logo mb-4">Pyy</div>
-        <ul class="sidebar-menu">
-          <li class="active">
-            <a
-              href="dashboard.html"
-              style="
-                color: inherit;
-                text-decoration: none;
-                display: flex;
-                align-items: center;
-              "
-            >
-              <span class="sidebar-icon"><i class="bi bi-grid"></i></span>
-              <span class="sidebar-label">Dashboard</span>
-            </a>
-          </li>
-          <li>
-            <a
-              href="project.html"
-              style="
-                color: inherit;
-                text-decoration: none;
-                display: flex;
-                align-items: center;
-              "
-            >
-              <span class="sidebar-icon"><i class="bi bi-people"></i></span>
-              <span class="sidebar-label">Project</span>
-            </a>
-          </li>
-          <li>
-            <a
-              href="certificate.html"
-              style="
-                color: inherit;
-                text-decoration: none;
-                display: flex;
-                align-items: center;
-              "
-            >
-              <span class="sidebar-icon"><i class="bi bi-award"></i></span>
-              <span class="sidebar-label">Sertificate</span>
-            </a>
-          </li>
-          <li>
-            <a
-              href="galeri.html"
-              style="
-                color: inherit;
-                text-decoration: none;
-                display: flex;
-                align-items: center;
-              "
-            >
-              <span class="sidebar-icon"><i class="bi bi-images"></i></span>
-              <span class="sidebar-label">Galeri</span>
-            </a>
-          </li>
-          <li>
-            <a
-              href="calendar.html"
-              style="
-                color: inherit;
-                text-decoration: none;
-                display: flex;
-                align-items: center;
-              "
-            >
-              <span class="sidebar-icon"><i class="bi bi-calendar"></i></span>
-              <span class="sidebar-label">Calendar</span>
-            </a>
-          </li>
-          <li>
-            <a
-              href="settings.html"
-              style="
-                color: inherit;
-                text-decoration: none;
-                display: flex;
-                align-items: center;
-              "
-            >
-              <span class="sidebar-icon"><i class="bi bi-gear"></i></span>
-              <span class="sidebar-label">Settings</span>
-            </a>
-          </li>
-        </ul>
-        <!-- <div class="sidebar-premium mt-auto">
-          <img
-            src="image/bintanglima.png"
-            alt="Premium"
-            class="sidebar-premium-img"
-          />
-          <div class="sidebar-premium-text">Use our Premium Features Now!</div>
-        </div>
-        <div class="sidebar-admin mt-4" id="sidebarAdminName"></div> -->
-        <a class="btn btn-sm btn-danger mt-2 w-100" href="#" id="logoutBtn"
-          >Logout</a
-        >
-      </aside>
-      <!-- Tombol toggle sidebar dipindah ke dalam dashboard-header -->
-      <main class="dashboard-main">
-        <div
-          class="dashboard-header"
-          style="
-            background: #fff;
-            border-radius: 12px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-            padding: 18px 32px;
-            margin-bottom: 24px;
-          "
-        >
-          <div
-            class="dashboard-title mb-0"
-            style="font-size: 2rem; font-weight: 700; color: #2d3748"
-          >
-            Dashboard
-          </div>
-          <div class="dashboard-header-actions">
-            <i class="bi bi-bell"></i>
-            <i class="bi bi-envelope"></i>
-            <span class="dashboard-user">
-              <img src="image/me.jpeg" alt="Admin" class="dashboard-user-img" />
-              <span id="dashboardUserName"></span>
-            </span>
-          </div>
-        </div>
 
-        <div class="dashboard-content-hr row gx-4 gy-4">
-          <div class="col-lg-8">
-            <div class="dashboard-welcome card mb-4">
-              <div class="card-body d-flex align-items-center">
-                <div class="flex-grow-1">
-                  <h5>
-                    Selamat <span id="greetingTime"></span>
-                    <span id="welcomeName">Admin</span>!
-                  </h5>
-                  <script>
-                    function getGreeting() {
-                      const hour = new Date().getHours();
-                      if (hour >= 5 && hour < 12) return "pagi";
-                      if (hour >= 12 && hour < 15) return "siang";
-                      if (hour >= 15 && hour < 18) return "sore";
-                      return "malam";
-                    }
-                    document.getElementById("greetingTime").textContent =
-                      getGreeting();
-                  </script>
-                </div>
-              </div>
-            </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard - Portfolio Admin</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" />
+  <link rel="stylesheet" href="dashboard-new.css" />
+  <link rel="icon" href="image/logo.png" type="image/x-icon" />
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js/dist/umd/supabase.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
 
-            <div class="dashboard-section card">
-              <div class="card-body">
-                <div
-                  class="d-flex justify-content-between align-items-center mb-3"
-                >
-                  <h6 class="mb-0">Summary</h6>
-                </div>
-                <div class="row text-center">
-                  <div class="col-md-4 mb-3">
-                    <div class="card shadow-sm">
-                      <div class="card-body">
-                        <i
-                          class="bi bi-images"
-                          style="font-size: 2rem; color: #6c63ff"
-                        ></i>
-                        <h5 class="mt-2 mb-1">Gallery</h5>
-                        <div class="fs-3 fw-bold" id="totalGallery">12</div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-4 mb-3">
-                    <div class="card shadow-sm">
-                      <div class="card-body">
-                        <i
-                          class="bi bi-people"
-                          style="font-size: 2rem; color: #ff6584"
-                        ></i>
-                        <h5 class="mt-2 mb-1">Projects</h5>
-                        <div class="fs-3 fw-bold" id="totalProjects">8</div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-4 mb-3">
-                    <div class="card shadow-sm">
-                      <div class="card-body">
-                        <i
-                          class="bi bi-award"
-                          style="font-size: 2rem; color: #43e97b"
-                        ></i>
-                        <h5 class="mt-2 mb-1">Certificates</h5>
-                        <div class="fs-3 fw-bold" id="totalCertificates">5</div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="dashboard-section card mt-2">
-            <div class="card"></div>
-              <div class="card-body py-2 px-1">
-                <h6 class="mb-2 text-center" style="font-size:1rem;">Grafik Summary</h6>
-                <canvas id="summaryChart" height="120" style="max-height:120px;"></canvas>
-              </div>
-            </div>
-            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-            <script>
-              const ctx = document.getElementById('summaryChart').getContext('2d');
-              const summaryChart = new Chart(ctx, {
-                type: 'line',
-                data: {
-                  labels: ['Certificates', 'Projects', 'Gallery'],
-                  datasets: [{
-                    label: 'Total',
-                    data: [
-                      parseInt(document.getElementById('totalCertificates').textContent),
-                      parseInt(document.getElementById('totalProjects').textContent),
-                      parseInt(document.getElementById('totalGallery').textContent)
-                    ],
-                    backgroundColor: 'rgba(67,233,123,0.2)',
-                    borderColor: '#43e97b',
-                    pointBackgroundColor: [
-                      '#43e97b',
-                      '#ff6584',
-                      '#6c63ff'
-                    ],
-                    pointBorderColor: '#fff',
-                    borderWidth: 2,
-                    tension: 0.3
-                  }]
-                },
-                options: {
-                  responsive: true,
-                  plugins: {
-                    legend: { display: false }
-                  },
-                  scales: {
-                    y: { beginAtZero: true }
-                  }
-                }
-              });
-            </script>
-          </div>
-
-          <div class="col-lg-4">
-            <div class="dashboard-calendar card mb-4">
-              <div class="card-body">
-                <div
-                  class="d-flex justify-content-between align-items-center mb-2"
-                >
-                  <span id="calendarMonthYear"></span>
-                  <div>
-                    <button class="btn btn-light btn-sm" id="calendarPrevBtn">
-                      <i class="bi bi-chevron-left"></i>
-                    </button>
-                    <button class="btn btn-light btn-sm" id="calendarNextBtn">
-                      <i class="bi bi-chevron-right"></i>
-                    </button>
-                  </div>
-                </div>
-                <table
-                  class="table table-bordered dashboard-calendar-table mb-0"
-                >
-                  <thead>
-                    <tr>
-                      <th>SU</th>
-                      <th>MO</th>
-                      <th>TU</th>
-                      <th>WE</th>
-                      <th>TH</th>
-                      <th>FR</th>
-                      <th>SA</th>
-                    </tr>
-                  </thead>
-                  <tbody id="calendarBody">
-                    <!-- Calendar days will be injected here -->
-                  </tbody>
-                </table>
-              </div>
-            </div>
-            <script>
-              function renderCalendar(month, year) {
-                const calendarBody = document.getElementById("calendarBody");
-                const monthYear = document.getElementById("calendarMonthYear");
-                const today = new Date();
-                const firstDay = new Date(year, month, 1).getDay();
-                const daysInMonth = new Date(year, month + 1, 0).getDate();
-                const monthNames = [
-                  "January",
-                  "February",
-                  "March",
-                  "April",
-                  "May",
-                  "June",
-                  "July",
-                  "August",
-                  "September",
-                  "October",
-                  "November",
-                  "December",
-                ];
-                monthYear.textContent = `${monthNames[month]}, ${year}`;
-                let html = "";
-                let date = 1;
-                for (let i = 0; i < 6; i++) {
-                  html += "<tr>";
-                  for (let j = 0; j < 7; j++) {
-                    if (i === 0 && j < firstDay) {
-                      html += "<td></td>";
-                    } else if (date > daysInMonth) {
-                      html += "<td></td>";
-                    } else {
-                      const isToday =
-                        date === today.getDate() &&
-                        month === today.getMonth() &&
-                        year === today.getFullYear();
-                      html += `<td${
-                        isToday ? ' class="calendar-today"' : ""
-                      }>${date}</td>`;
-                      date++;
-                    }
-                  }
-                  html += "</tr>";
-                  if (date > daysInMonth) break;
-                }
-                calendarBody.innerHTML = html;
-              }
-              let currentMonth = new Date().getMonth();
-              let currentYear = new Date().getFullYear();
-              renderCalendar(currentMonth, currentYear);
-              document.getElementById("calendarPrevBtn").onclick = function () {
-                currentMonth--;
-                if (currentMonth < 0) {
-                  currentMonth = 11;
-                  currentYear--;
-                }
-                renderCalendar(currentMonth, currentYear);
-              };
-              document.getElementById("calendarNextBtn").onclick = function () {
-                currentMonth++;
-                if (currentMonth > 11) {
-                  currentMonth = 0;
-                  currentYear++;
-                }
-                renderCalendar(currentMonth, currentYear);
-              };
-            </script>
-            <div class="dashboard-profile card">
-              <div class="card-body text-center">
-                <img
-                  src="image/me.jpeg"
-                  class="dashboard-profile-img mb-2"
-                  alt="Profile"
-                />
-                <div class="fw-bold" id="profileName">Mr Smith</div>
-                <div class="text-muted mb-2" style="font-size: 0.9rem">
-                  Sr. HR Manager
-                </div>
-                <div class="d-flex justify-content-center gap-2 mb-2">
-                  <a href="#" class="btn btn-light btn-sm"
-                    ><i class="bi bi-telephone"></i
-                  ></a>
-                  <a href="#" class="btn btn-light btn-sm"
-                    ><i class="bi bi-envelope"></i
-                  ></a>
-                  <a href="#" class="btn btn-light btn-sm"
-                    ><i class="bi bi-chat"></i
-                  ></a>
-                </div>
-                <div class="text-start mt-3" style="font-size: 0.9rem">
-                  <div><b>Company</b>: FastHR Pvt. Ltd.</div>
-                  <div><b>Joining Date</b>: 01/03/2018</div>
-                  <div><b>Projects</b>: 34 Active</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </main>
+<body oncontextmenu="return false;">
+  <script>
+    document.addEventListener('contextmenu', e => e.preventDefault());
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && e.key === 'I') ||
+        (e.ctrlKey && e.shiftKey && e.key === 'J') || (e.ctrlKey && e.key === 'u') ||
+        (e.ctrlKey && e.key === 's')) { e.preventDefault(); return false; }
+    });
+  </script>
+  <!-- Sidebar -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+      <div class="logo-icon">R</div>
+      <span class="logo-text">Portfolio Admin</span>
     </div>
-    <script src="dashboard/js/dashboard.js"></script>
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
-    />
-  </body>
+
+    <nav class="sidebar-nav">
+      <div class="nav-section">
+        <div class="nav-section-title">Main Menu</div>
+        <a href="dashboard.html" class="nav-item active">
+          <i class="bi bi-grid-1x2"></i>
+          <span>Dashboard</span>
+        </a>
+        <a href="project.html" class="nav-item">
+          <i class="bi bi-folder"></i>
+          <span>Projects</span>
+        </a>
+        <a href="certificate.html" class="nav-item">
+          <i class="bi bi-award"></i>
+          <span>Certificates</span>
+        </a>
+        <a href="galeri.html" class="nav-item">
+          <i class="bi bi-images"></i>
+          <span>Gallery</span>
+        </a>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-title">Quick Links</div>
+        <a href="index.html" class="nav-item" target="_blank">
+          <i class="bi bi-globe"></i>
+          <span>View Portfolio</span>
+        </a>
+      </div>
+    </nav>
+
+    <div class="sidebar-footer">
+      <a href="#" class="nav-item" id="logoutBtn">
+        <i class="bi bi-box-arrow-left"></i>
+        <span>Logout</span>
+      </a>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <!-- Header -->
+    <header class="dashboard-header">
+      <div class="header-left">
+        <button class="menu-toggle" id="menuToggle">
+          <i class="bi bi-list"></i>
+        </button>
+        <h1 class="page-title">Dashboard</h1>
+      </div>
+
+      <div class="header-right">
+        <div class="header-search">
+          <i class="bi bi-search"></i>
+          <input type="text" placeholder="Search..." />
+        </div>
+
+        <div class="header-actions">
+          <button class="header-btn">
+            <i class="bi bi-bell"></i>
+            <span class="badge"></span>
+          </button>
+        </div>
+
+        <div class="user-profile">
+          <div class="user-avatar" id="userAvatar">A</div>
+          <div class="user-info">
+            <span class="user-name" id="userName">Admin</span>
+            <span class="user-role">Administrator</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Dashboard Content -->
+    <div class="dashboard-content">
+      <!-- Welcome Section -->
+      <div class="welcome-section">
+        <div class="welcome-content">
+          <h2 class="welcome-title">Welcome back, <span id="welcomeName">Admin</span>! 👋</h2>
+          <p class="welcome-text">Here's an overview of your portfolio performance today.</p>
+        </div>
+      </div>
+
+      <!-- Stats Grid -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-info">
+            <h3>Total Gallery</h3>
+            <div class="stat-value" id="galleryCount">0</div>
+            <div class="stat-change positive">
+              <i class="bi bi-arrow-up"></i> Images uploaded
+            </div>
+          </div>
+          <div class="stat-icon primary">
+            <i class="bi bi-images"></i>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-info">
+            <h3>Total Projects</h3>
+            <div class="stat-value" id="projectCount">0</div>
+            <div class="stat-change positive">
+              <i class="bi bi-arrow-up"></i> Projects completed
+            </div>
+          </div>
+          <div class="stat-icon secondary">
+            <i class="bi bi-folder"></i>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-info">
+            <h3>Total Certificates</h3>
+            <div class="stat-value" id="certCount">0</div>
+            <div class="stat-change positive">
+              <i class="bi bi-arrow-up"></i> Certificates earned
+            </div>
+          </div>
+          <div class="stat-icon success">
+            <i class="bi bi-award"></i>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-info">
+            <h3>Profile Views</h3>
+            <div class="stat-value">1.2K</div>
+            <div class="stat-change positive">
+              <i class="bi bi-arrow-up"></i> +12% this month
+            </div>
+          </div>
+          <div class="stat-icon warning">
+            <i class="bi bi-eye"></i>
+          </div>
+        </div>
+      </div>
+
+      <!-- Charts and Profile Section -->
+      <div class="grid-2">
+        <!-- Chart Card -->
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">Portfolio Overview</h3>
+          </div>
+          <div class="card-body">
+            <div class="chart-container">
+              <canvas id="statsChart"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <!-- Profile Card -->
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">Admin Profile</h3>
+          </div>
+          <div class="card-body">
+            <div class="profile-card">
+              <div class="profile-avatar" id="profileAvatar">R</div>
+              <h3 class="profile-name" id="profileName">Refa Fatur</h3>
+              <p class="profile-email" id="profileEmail">admin@portfolio.com</p>
+
+              <div class="profile-stats">
+                <div class="profile-stat">
+                  <div class="profile-stat-value" id="profileProjects">0</div>
+                  <div class="profile-stat-label">Projects</div>
+                </div>
+                <div class="profile-stat">
+                  <div class="profile-stat-value" id="profileCerts">0</div>
+                  <div class="profile-stat-label">Certificates</div>
+                </div>
+                <div class="profile-stat">
+                  <div class="profile-stat-value" id="profileGallery">0</div>
+                  <div class="profile-stat-label">Gallery</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Actions -->
+      <div class="card mt-3">
+        <div class="card-header">
+          <h3 class="card-title">Quick Actions</h3>
+        </div>
+        <div class="card-body">
+          <div class="d-flex gap-2" style="flex-wrap: wrap;">
+            <a href="project.html" class="btn btn-primary">
+              <i class="bi bi-plus"></i> Add Project
+            </a>
+            <a href="certificate.html" class="btn btn-secondary">
+              <i class="bi bi-plus"></i> Add Certificate
+            </a>
+            <a href="galeri.html" class="btn btn-secondary">
+              <i class="bi bi-plus"></i> Add Gallery
+            </a>
+            <a href="index.html" target="_blank" class="btn btn-secondary">
+              <i class="bi bi-globe"></i> View Portfolio
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    const SUPABASE_URL = 'https://swsqdksyabjbafmuxljx.supabase.co';
+    const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InN3c3Fka3N5YWJqYmFmbXV4bGp4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTYxODU2MDEsImV4cCI6MjA3MTc2MTYwMX0.P1vKqCAkQD5F9O5mBqph0z-eyJ508I8-lOJs_0muchk';
+    const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+    // Mobile menu toggle
+    document.getElementById('menuToggle').addEventListener('click', () => {
+      document.getElementById('sidebar').classList.toggle('open');
+    });
+
+    // Set user name from localStorage
+    const adminName = localStorage.getItem('adminName') || 'Admin';
+    document.getElementById('userName').textContent = adminName;
+    document.getElementById('welcomeName').textContent = adminName;
+    document.getElementById('profileName').textContent = adminName;
+    document.getElementById('userAvatar').textContent = adminName.charAt(0).toUpperCase();
+    document.getElementById('profileAvatar').textContent = adminName.charAt(0).toUpperCase();
+
+    // Logout handler
+    document.getElementById('logoutBtn').addEventListener('click', (e) => {
+      e.preventDefault();
+      localStorage.removeItem('adminName');
+      window.location.href = 'login.html';
+    });
+
+    // Load stats from Supabase - USING CORRECT TABLE NAMES
+    async function loadStats() {
+      try {
+        // Gallery count - table: tbl_galeris
+        const { count: galleryCount } = await supabaseClient
+          .from('tbl_galeris')
+          .select('*', { count: 'exact', head: true });
+
+        // Project count - table: tbl_project
+        const { count: projectCount } = await supabaseClient
+          .from('tbl_project')
+          .select('*', { count: 'exact', head: true });
+
+        // Certificate count - table: tbl_certificates
+        const { count: certCount } = await supabaseClient
+          .from('tbl_certificates')
+          .select('*', { count: 'exact', head: true });
+
+        // Update UI
+        document.getElementById('galleryCount').textContent = galleryCount || 0;
+        document.getElementById('projectCount').textContent = projectCount || 0;
+        document.getElementById('certCount').textContent = certCount || 0;
+
+        // Profile stats
+        document.getElementById('profileGallery').textContent = galleryCount || 0;
+        document.getElementById('profileProjects').textContent = projectCount || 0;
+        document.getElementById('profileCerts').textContent = certCount || 0;
+
+        // Initialize chart
+        initChart(galleryCount || 0, projectCount || 0, certCount || 0);
+      } catch (error) {
+        console.error('Error loading stats:', error);
+      }
+    }
+
+    // Chart initialization
+    function initChart(gallery, projects, certs) {
+      const ctx = document.getElementById('statsChart').getContext('2d');
+      new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+          labels: ['Gallery', 'Projects', 'Certificates'],
+          datasets: [{
+            data: [gallery, projects, certs],
+            backgroundColor: [
+              'rgba(99, 102, 241, 0.8)',
+              'rgba(139, 92, 246, 0.8)',
+              'rgba(16, 185, 129, 0.8)'
+            ],
+            borderColor: [
+              'rgba(99, 102, 241, 1)',
+              'rgba(139, 92, 246, 1)',
+              'rgba(16, 185, 129, 1)'
+            ],
+            borderWidth: 2,
+            hoverOffset: 4
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              position: 'bottom',
+              labels: {
+                padding: 20,
+                font: {
+                  family: 'Outfit',
+                  size: 13
+                }
+              }
+            }
+          },
+          cutout: '65%'
+        }
+      });
+    }
+
+    // Load stats on page load
+    loadStats();
+  </script>
+
+  <!-- Theme Toggle Button -->
+  <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+    <i class="bi bi-moon-fill"></i>
+    <i class="bi bi-sun-fill"></i>
+  </button>
+
+  <script>
+    (function () {
+      const toggle = document.getElementById('themeToggle');
+      const html = document.documentElement;
+      const savedTheme = localStorage.getItem('theme') || 'light';
+      if (savedTheme === 'dark') html.setAttribute('data-theme', 'dark');
+      toggle.addEventListener('click', () => {
+        const newTheme = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        html.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+      });
+    })();
+  </script>
+</body>
+
 </html>

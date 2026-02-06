@@ -1,960 +1,374 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Dashboard Admin</title>
-    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" />
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js/dist/umd/supabase.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <link rel="icon" href="image/logo.png" type="image/x-icon" />
-    <link rel="stylesheet" href="dashboard/css/dashboard.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
-    />
-  </head>
-  <body>
-    <!-- Tombol toggle sidebar di luar sidemenu, hanya tampil di layar kecil -->
-    <button
-      id="sidebarToggleBtn"
-      class="sidebar-toggle-btn"
-      title="Tampilkan/ Sembunyikan Menu"
-    >
-      <i class="bi bi-list"></i>
-    </button>
-    <div class="dashboard-hr-container">
-      <aside class="dashboard-sidebar" id="dashboardSidebar">
-        <div class="sidebar-logo mb-4">Pyy</div>
-        <ul class="sidebar-menu">
-          <li>
-            <a
-              href="dashboard.html"
-              style="
-                color: inherit;
-                text-decoration: none;
-                display: flex;
-                align-items: center;
-              "
-            >
-              <span class="sidebar-icon"><i class="bi bi-grid"></i></span>
-              <span class="sidebar-label">Dashboard</span>
-            </a>
-          </li>
-          <li class="active">
-            <a
-              href="project.html"
-              style="
-                color: inherit;
-                text-decoration: none;
-                display: flex;
-                align-items: center;
-              "
-            >
-              <span class="sidebar-icon"><i class="bi bi-people"></i></span>
-              <span class="sidebar-label">Project</span>
-            </a>
-          </li>
-          <li>
-            <a
-              href="certificate.html"
-              style="
-                color: inherit;
-                text-decoration: none;
-                display: flex;
-                align-items: center;
-              "
-            >
-              <span class="sidebar-icon"><i class="bi bi-award"></i></span>
-              <span class="sidebar-label">Sertificate</span>
-            </a>
-          </li>
-          <li>
-            <a
-              href="galeri.html"
-              style="
-                color: inherit;
-                text-decoration: none;
-                display: flex;
-                align-items: center;
-              "
-            >
-              <span class="sidebar-icon"><i class="bi bi-images"></i></span>
-              <span class="sidebar-label">Galeri</span>
-            </a>
-          </li>
-          <li>
-            <a
-              href="calendar.html"
-              style="
-                color: inherit;
-                text-decoration: none;
-                display: flex;
-                align-items: center;
-              "
-            >
-              <span class="sidebar-icon"><i class="bi bi-calendar"></i></span>
-              <span class="sidebar-label">Calendar</span>
-            </a>
-          </li>
-          <li>
-            <a
-              href="settings.html"
-              style="
-                color: inherit;
-                text-decoration: none;
-                display: flex;
-                align-items: center;
-              "
-            >
-              <span class="sidebar-icon"><i class="bi bi-gear"></i></span>
-              <span class="sidebar-label">Settings</span>
-            </a>
-          </li>
-        </ul>
-        <!-- <div class="sidebar-premium mt-auto">
-          <img
-            src="image/bintanglima.png"
-            alt="Premium"
-            class="sidebar-premium-img"
-            loading="lazy"
-          />
-          <div class="sidebar-premium-text">Use our Premium Features Now!</div>
-        </div>
-        <div class="sidebar-admin mt-4" id="sidebarAdminName"></div> -->
-        <a class="btn btn-sm btn-danger mt-2 w-100" href="#" id="logoutBtn"
-          >Logout</a
-        >
-      </aside>
-      <!-- Tombol toggle sidebar dipindah ke dalam dashboard-header -->
-      <main
-        class="dashboard-main"
-        style="background: #f6f8fa; min-height: 100vh"
-      >
-        <div
-          class="dashboard-header"
-          style="
-            background: #fff;
-            border-radius: 12px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-            padding: 18px 32px;
-            margin-bottom: 24px;
-          "
-        >
-          <div
-            class="dashboard-title mb-0"
-            style="font-size: 2rem; font-weight: 700; color: #2d3748"
-          >
-            Project Management
-          </div>
-          <div class="dashboard-header-actions">
-            <i class="bi bi-bell"></i>
-            <i class="bi bi-envelope"></i>
-            <span class="dashboard-user">
-              <img
-                src="image/me.jpeg"
-                alt="Admin"
-                class="dashboard-user-img"
-                loading="lazy"
-              />
-              <span id="dashboardUserName"></span>
-            </span>
-          </div>
-        </div>
 
-        <div class="dashboard-content-hr row gx-4 gy-4">
-          <div class="col-12">
-            <div
-              class="dashboard-section card"
-              style="
-                border-radius: 16px;
-                box-shadow: 0 4px 24px rgba(44, 62, 80, 0.08);
-                border: none;
-              "
-            >
-              <div class="card-body" style="padding: 32px">
-                <div
-                  class="d-flex justify-content-between align-items-center mb-4"
-                >
-                  <div>
-                    <h4 class="mb-1" style="font-weight: 700; color: #2d3748">
-                      Daftar Project
-                    </h4>
-                    <div style="color: #718096; font-size: 1rem">
-                      Kelola project portofolio Anda dengan mudah dan
-                      profesional.
-                    </div>
-                  </div>
-                  <button
-                    class="btn btn-primary shadow-sm"
-                    id="addProjectBtn"
-                    style="font-weight: 600; border-radius: 8px"
-                  >
-                    <i class="bi bi-plus"></i> Add Project
-                  </button>
-                </div>
-                <div class="table-responsive">
-                  <!-- Ganti tabel dengan grid card -->
-                  <div class="row" id="projectCardGrid">
-                    <!-- Project cards akan diisi lewat JS -->
-                  </div>
-                </div>
-                <!-- Modal Add Project -->
-                <div
-                  class="modal fade"
-                  id="addProjectModal"
-                  tabindex="-1"
-                  aria-labelledby="addProjectModalLabel"
-                  aria-hidden="true"
-                >
-                  <div class="modal-dialog">
-                    <div class="modal-content" style="border-radius: 16px">
-                      <div class="modal-header" style="border-bottom: none">
-                        <h5
-                          class="modal-title"
-                          id="addProjectModalLabel"
-                          style="font-weight: 700"
-                        >
-                          Add Project
-                        </h5>
-                        <button
-                          type="button"
-                          class="btn-close"
-                          data-bs-dismiss="modal"
-                          aria-label="Close"
-                        ></button>
-                      </div>
-                      <form id="addProjectForm">
-                        <div class="modal-body">
-                          <div class="mb-3">
-                            <label
-                              for="projectNama"
-                              class="form-label"
-                              style="font-weight: 600"
-                              >Nama Project</label
-                            >
-                            <input
-                              type="text"
-                              class="form-control"
-                              id="projectNama"
-                              name="nama"
-                              required
-                              style="border-radius: 8px"
-                            />
-                          </div>
-                          <div class="mb-3">
-                            <label
-                              for="projectFoto"
-                              class="form-label"
-                              style="font-weight: 600"
-                              >Foto (Upload)</label
-                            >
-                            <input
-                              type="file"
-                              class="form-control"
-                              id="projectFoto"
-                              name="foto"
-                              accept="image/*"
-                              required
-                              style="border-radius: 8px"
-                            />
-                          </div>
-                          <div class="mb-3">
-                            <label
-                              for="projectKeterangan"
-                              class="form-label"
-                              style="font-weight: 600"
-                              >Keterangan</label
-                            >
-                            <textarea
-                              class="form-control"
-                              id="projectKeterangan"
-                              name="keterangan"
-                              rows="3"
-                              required
-                              style="border-radius: 8px"
-                            ></textarea>
-                          </div>
-                        </div>
-                        <div class="modal-footer" style="border-top: none">
-                          <button
-                            type="button"
-                            class="btn btn-secondary"
-                            data-bs-dismiss="modal"
-                            style="border-radius: 8px"
-                          >
-                            Cancel
-                          </button>
-                          <button
-                            type="submit"
-                            class="btn btn-primary"
-                            style="border-radius: 8px"
-                          >
-                            Save
-                          </button>
-                        </div>
-                      </form>
-                    </div>
-                  </div>
-                </div>
-                <!-- Modal Edit Project -->
-                <div
-                  class="modal fade"
-                  id="editProjectModal"
-                  tabindex="-1"
-                  aria-labelledby="editProjectModalLabel"
-                  aria-hidden="true"
-                >
-                  <div class="modal-dialog">
-                    <div class="modal-content" style="border-radius: 16px">
-                      <div class="modal-header" style="border-bottom: none">
-                        <h5
-                          class="modal-title"
-                          id="editProjectModalLabel"
-                          style="font-weight: 700"
-                        >
-                          Edit Project
-                        </h5>
-                        <button
-                          type="button"
-                          class="btn-close"
-                          data-bs-dismiss="modal"
-                          aria-label="Close"
-                        ></button>
-                      </div>
-                      <form id="editProjectForm">
-                        <div class="modal-body">
-                          <input type="hidden" id="editProjectId" name="id" />
-                          <input
-                            type="hidden"
-                            id="editProjectOldFoto"
-                            name="old_foto"
-                          />
-                          <div class="mb-3 text-center">
-                            <img
-                              id="editProjectPreviewImg"
-                              src=""
-                              alt="Preview"
-                              loading="lazy"
-                              style="
-                                width: 64px;
-                                height: 64px;
-                                object-fit: cover;
-                                border-radius: 12px;
-                                margin-bottom: 8px;
-                                display: none;
-                              "
-                            />
-                          </div>
-                          <div class="mb-3">
-                            <label
-                              for="editProjectNama"
-                              class="form-label"
-                              style="font-weight: 600"
-                            >
-                              Nama Project
-                            </label>
-                            <input
-                              type="text"
-                              class="form-control"
-                              id="editProjectNama"
-                              name="nama"
-                              required
-                              style="border-radius: 8px"
-                            />
-                          </div>
-                          <div class="mb-3">
-                            <label
-                              for="editProjectFoto"
-                              class="form-label"
-                              style="font-weight: 600"
-                            >
-                              Foto (Upload, kosongkan jika tidak ganti)
-                            </label>
-                            <input
-                              type="file"
-                              class="form-control"
-                              id="editProjectFoto"
-                              name="foto"
-                              accept="image/*"
-                              style="border-radius: 8px"
-                            />
-                          </div>
-                          <div class="mb-3">
-                            <label
-                              for="editProjectKeterangan"
-                              class="form-label"
-                              style="font-weight: 600"
-                            >
-                              Keterangan
-                            </label>
-                            <textarea
-                              class="form-control"
-                              id="editProjectKeterangan"
-                              name="keterangan"
-                              rows="3"
-                              required
-                              style="border-radius: 8px"
-                            ></textarea>
-                          </div>
-                        </div>
-                        <div class="modal-footer" style="border-top: none">
-                          <button
-                            type="button"
-                            class="btn btn-secondary"
-                            data-bs-dismiss="modal"
-                            style="border-radius: 8px"
-                          >
-                            Cancel
-                          </button>
-                          <button
-                            type="submit"
-                            class="btn btn-primary"
-                            style="border-radius: 8px"
-                          >
-                            Update
-                          </button>
-                        </div>
-                      </form>
-                    </div>
-                  </div>
-                </div>
-                <!-- End Modal Edit Project -->
-              </div>
-            </div>
-          </div>
-        </div>
-        <style>
-          /* Custom style for professional look */
-          .dashboard-section.card {
-            transition: box-shadow 0.2s;
-          }
-          .dashboard-section.card:hover {
-            box-shadow: 0 8px 32px rgba(44, 62, 80, 0.12);
-          }
-          .table-responsive {
-            border-radius: 18px;
-            overflow: hidden;
-            box-shadow: 0 4px 24px rgba(44, 62, 80, 0.1);
-            background: #fff;
-            margin-bottom: 0;
-          }
-          #projectCardGrid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 24px;
-          }
-          .project-card {
-            background: #fff;
-            border-radius: 18px;
-            box-shadow: 0 4px 24px rgba(44, 62, 80, 0.1);
-            padding: 24px 20px 18px 20px;
-            margin-bottom: 0;
-            width: 100%;
-            max-width: 340px;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            transition: box-shadow 0.2s, transform 0.2s;
-          }
-          .project-card:hover {
-            box-shadow: 0 8px 32px rgba(44, 62, 80, 0.14);
-            transform: translateY(-2px) scale(1.01);
-          }
-          .project-card-img {
-            width: 100%;
-            height: 160px;
-            object-fit: cover;
-            border-radius: 12px;
-            margin-bottom: 16px;
-            background: #f8fafc;
-            box-shadow: 0 1px 4px #e0e7ff;
-          }
-          .project-card-title {
-            font-size: 1.18rem;
-            font-weight: 700;
-            color: #4f46e5;
-            margin-bottom: 8px;
-          }
-          .project-card-desc {
-            color: #374151;
-            font-size: 0.98rem;
-            margin-bottom: 16px;
-            min-height: 48px;
-            max-height: 48px;
-            overflow: hidden;
-            text-overflow: ellipsis;
-          }
-          .project-card-actions {
-            margin-top: auto;
-            display: flex;
-            gap: 8px;
-          }
-          .btn-primary,
-          .btn-warning,
-          .btn-danger {
-            font-weight: 600;
-            border-radius: 10px;
-            transition: background 0.18s, box-shadow 0.18s;
-          }
-          .btn-warning {
-            color: #fff;
-            background: #f59e42;
-            border: none;
-          }
-          .btn-warning:hover {
-            background: #e67e22;
-          }
-          .btn-danger {
-            background: #e53e3e;
-            border: none;
-          }
-          .btn-danger:hover {
-            background: #c53030;
-          }
-          .btn-sm {
-            padding: 6px 14px;
-            font-size: 0.98rem;
-            border-radius: 8px;
-          }
-          .project-card-img-container {
-            min-height: 160px;
-            position: relative;
-          }
-          .lazy-spinner {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: #f8fafc;
-            z-index: 2;
-            border-radius: 12px;
-          }
-          .project-card-img {
-            position: relative;
-            z-index: 3;
-          }
-          @media (max-width: 1200px) {
-            #projectCardGrid {
-              gap: 18px;
-            }
-            .project-card {
-              max-width: 48%;
-            }
-          }
-          @media (max-width: 768px) {
-            #projectCardGrid {
-              gap: 12px;
-            }
-            .project-card {
-              max-width: 100%;
-            }
-          }
-        </style>
-        <script>
-          // Ganti dengan URL dan KEY Supabase Anda
-          const supabaseUrl = "https://swsqdksyabjbafmuxljx.supabase.co";
-          const supabaseKey =
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InN3c3Fka3N5YWJqYmFmbXV4bGp4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTYxODU2MDEsImV4cCI6MjA3MTc2MTYwMX0.P1vKqCAkQD5F9O5mBqph0z-eyJ508I8-lOJs_0muchk";
-          const supabase = window.supabase.createClient(
-            supabaseUrl,
-            supabaseKey
-          );
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Projects - Portfolio Admin</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" />
+  <link rel="stylesheet" href="dashboard-new.css" />
+  <link rel="icon" href="image/logo.png" type="image/x-icon" />
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js/dist/umd/supabase.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <style>
+    .file-upload {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 30px;
+      border: 2px dashed var(--gray-300);
+      border-radius: 12px;
+      background: var(--gray-50);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
 
-          // Spinner HTML for lazy loading
-          const spinnerHtml = `
-            <div class="lazy-spinner d-flex align-items-center justify-content-center" style="width:100%;height:160px;">
-              <div class="spinner-border text-primary" role="status" style="width:2.5rem;height:2.5rem;">
-                <span class="visually-hidden">Loading...</span>
-              </div>
-            </div>
-          `;
+    .file-upload:hover {
+      border-color: var(--primary);
+      background: rgba(99, 102, 241, 0.05);
+    }
 
-          async function loadProjects() {
-            const { data, error } = await supabase
-              .from("tbl_project")
-              .select("*")
-              .limit(10);
+    .file-upload input[type="file"] {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      cursor: pointer;
+    }
 
-            const grid = document.getElementById("projectCardGrid");
-            grid.innerHTML = "";
-            if (error) {
-              grid.innerHTML = `<div class="col-12 text-center text-danger">Failed to load data</div>`;
-              return;
-            }
-            if (!data || data.length === 0) {
-              grid.innerHTML = `<div class="col-12 text-center text-muted">No data found</div>`;
-              return;
-            }
-            data.forEach((project, idx) => {
-              const cardId = `project-card-img-${idx}`;
-              grid.innerHTML += `
-                <div class="project-card">
-                  ${
-                    project.foto
-                      ? `
-                        <div class="project-card-img-container position-relative" style="width:100%;">
-                          ${spinnerHtml}
-                          <img src="${project.foto}" alt="Foto" class="project-card-img" loading="lazy" id="${cardId}" style="display:none;">
-                        </div>
-                      `
-                      : `<div class="project-card-img d-flex align-items-center justify-content-center text-muted" style="background:#f3f4f6;">No Image</div>`
-                  }
-                  <div class="project-card-title">${project.nama || "-"}</div>
-                  <div class="project-card-desc">${
-                    project.keterangan || "-"
-                  }</div>
-                  <div class="project-card-actions">
-                    <button class="btn btn-sm btn-warning" title="Edit" onclick="editProject('${
-                      project.id
-                    }', '${project.nama?.replace(/'/g, "&#39;") || ""}', '${
-                project.foto || ""
-              }', '${
-                project.keterangan?.replace(/'/g, "&#39;") || ""
-              }')"><i class="bi bi-pencil"></i> Edit</button>
-                    <button class="btn btn-sm btn-danger" title="Delete" onclick="deleteProject('${
-                      project.id
-                    }', '${
-                project.foto || ""
-              }')"><i class="bi bi-trash"></i> Delete</button>
-                  </div>
-                </div>
-              `;
-            });
-            // Setelah semua card ditambahkan ke grid, pasang event listener pada gambar
-            setTimeout(() => {
-              data.forEach((project, idx) => {
-                const img = document.getElementById(`project-card-img-${idx}`);
-                if (img) {
-                  function hideSpinner() {
-                    img.style.display = "block";
-                    const spinner = img.previousElementSibling;
-                    if (spinner && spinner.classList.contains("lazy-spinner")) {
-                      spinner.style.display = "none";
-                    }
-                  }
-                  function showError() {
-                    img.style.display = "none";
-                    const spinner = img.previousElementSibling;
-                    if (spinner && spinner.classList.contains("lazy-spinner")) {
-                      spinner.innerHTML =
-                        '<span class="text-danger small">Failed to load image</span>';
-                    }
-                  }
-                  img.addEventListener("load", hideSpinner);
-                  img.addEventListener("error", showError);
-                  // Jika gambar sudah di-cache, tampilkan langsung tanpa spinner
-                  if (img.complete) {
-                    if (img.naturalWidth !== 0) {
-                      hideSpinner();
-                    } else {
-                      showError();
-                    }
-                  }
-                }
-              });
-            }, 0);
-          }
+    .file-upload i {
+      font-size: 2rem;
+      color: var(--gray-400);
+      margin-bottom: 8px;
+    }
 
-          // Fungsi global untuk edit dan hapus (moved outside loop)
-          let editProjectModalInstance;
-          function editProject(id, nama, foto, keterangan) {
-            document.getElementById("editProjectId").value = id;
-            document.getElementById("editProjectNama").value = nama.replace(
-              /&#39;/g,
-              "'"
-            );
-            document.getElementById("editProjectOldFoto").value = foto;
-            document.getElementById("editProjectKeterangan").value =
-              keterangan.replace(/&#39;/g, "'");
-            // Preview image
-            const previewImg = document.getElementById("editProjectPreviewImg");
-            if (foto) {
-              previewImg.src = foto;
-              previewImg.style.display = "inline-block";
-            } else {
-              previewImg.style.display = "none";
-            }
-            if (!editProjectModalInstance) {
-              editProjectModalInstance = new bootstrap.Modal(
-                document.getElementById("editProjectModal")
-              );
-            }
-            document.getElementById("editProjectForm").reset(); // reset file input
-            document.getElementById("editProjectNama").value = nama.replace(
-              /&#39;/g,
-              "'"
-            );
-            document.getElementById("editProjectKeterangan").value =
-              keterangan.replace(/&#39;/g, "'");
-            editProjectModalInstance.show();
-          }
+    .file-upload span {
+      color: var(--gray-500);
+      font-size: 0.9rem;
+    }
 
-          // Helper untuk show/hide spinner
-          function showSpinner(id) {
-            document.getElementById(id).style.display = "flex";
-          }
-          function hideSpinner(id) {
-            document.getElementById(id).style.display = "none";
-          }
+    .file-preview {
+      max-width: 100%;
+      max-height: 150px;
+      border-radius: 8px;
+      margin-top: 12px;
+      display: none;
+    }
 
-          // Helper untuk show/hide spinner global
-          function showGlobalSpinner() {
-            document.getElementById("globalProcessSpinner").style.display =
-              "flex";
-          }
-          function hideGlobalSpinner() {
-            document.getElementById("globalProcessSpinner").style.display =
-              "none";
-          }
+    .file-name {
+      font-size: 0.85rem;
+      color: var(--primary);
+      margin-top: 8px;
+    }
+  </style>
+</head>
 
-          async function deleteProject(id, fotoUrl) {
-            const confirm = await Swal.fire({
-              title: "Hapus Project?",
-              text: "Data project akan dihapus permanen!",
-              icon: "warning",
-              showCancelButton: true,
-              confirmButtonText: "Ya, hapus",
-              cancelButtonText: "Batal",
-            });
-            if (!confirm.isConfirmed) return;
-            showGlobalSpinner();
-            // Hapus dari database
-            const { error } = await supabase
-              .from("tbl_project")
-              .delete()
-              .eq("id", id);
-            if (error) {
-              Swal.fire("Gagal", "Gagal menghapus project!", "error");
-              return;
-            }
-            // Hapus file dari storage jika ada
-            if (fotoUrl) {
-              // Dapatkan path relatif dari publicUrl
-              const url = new URL(fotoUrl);
-              const path = url.pathname.split(
-                "/storage/v1/object/public/Portofolio/"
-              )[1];
-              if (path) {
-                await supabase.storage
-                  .from("Portofolio")
-                  .remove([`projects/${path}`]);
-              }
-            }
-            hideGlobalSpinner();
-            Swal.fire("Berhasil", "Project berhasil dihapus!", "success");
-            loadProjects();
-          }
-
-          // Modal logic
-          document.addEventListener("DOMContentLoaded", function () {
-            // Edit Project Form
-            document
-              .getElementById("editProjectForm")
-              .addEventListener("submit", async function (e) {
-                e.preventDefault();
-                showGlobalSpinner(); // Spinner global muncul saat proses edit
-                const id = document.getElementById("editProjectId").value;
-                const nama = document
-                  .getElementById("editProjectNama")
-                  .value.trim();
-                const keterangan = document
-                  .getElementById("editProjectKeterangan")
-                  .value.trim();
-                const oldFoto =
-                  document.getElementById("editProjectOldFoto").value;
-                const fotoInput = document.getElementById("editProjectFoto");
-                let fotoUrl = oldFoto;
-                // Jika ada file baru, upload ke storage
-                if (fotoInput.files && fotoInput.files[0]) {
-                  const file = fotoInput.files[0];
-                  const fileExt = file.name.split(".").pop();
-                  const fileName = `${Date.now()}_${Math.random()
-                    .toString(36)
-                    .substr(2, 8)}.${fileExt}`;
-                  const filePath = `projects/${fileName}`;
-                  const { data: uploadData, error: uploadError } =
-                    await supabase.storage
-                      .from("Portofolio")
-                      .upload(filePath, file);
-                  if (uploadError) {
-                    hideGlobalSpinner();
-                    Swal.fire(
-                      "Gagal",
-                      `Gagal upload foto! ${uploadError.message || ""}`,
-                      "error"
-                    );
-                    return;
-                  }
-                  // Ambil public URL
-                  const { data: publicUrlData, error: publicUrlError } =
-                    supabase.storage.from("Portofolio").getPublicUrl(filePath);
-                  if (
-                    publicUrlError ||
-                    !publicUrlData ||
-                    !publicUrlData.publicUrl
-                  ) {
-                    hideGlobalSpinner();
-                    Swal.fire(
-                      "Gagal",
-                      `Gagal ambil public URL! ${
-                        publicUrlError ? publicUrlError.message : ""
-                      }`,
-                      "error"
-                    );
-                    return;
-                  }
-                  fotoUrl = publicUrlData.publicUrl;
-                  // Hapus foto lama jika ada
-                  if (oldFoto) {
-                    try {
-                      const url = new URL(oldFoto);
-                      const idx = url.pathname.indexOf("/projects/");
-                      if (idx !== -1) {
-                        const path = url.pathname.substring(idx + 1); // remove leading slash
-                        await supabase.storage
-                          .from("Portofolio")
-                          .remove([path]);
-                      }
-                    } catch (e) {
-                      // ignore error
-                    }
-                  }
-                }
-                // Update ke database
-                const { error } = await supabase
-                  .from("tbl_project")
-                  .update({ nama, foto: fotoUrl, keterangan })
-                  .eq("id", id);
-                hideGlobalSpinner(); // Spinner global hilang setelah proses selesai
-                if (error) {
-                  Swal.fire("Gagal", "Gagal update project!", "error");
-                } else {
-                  Swal.fire(
-                    "Berhasil",
-                    "Project berhasil diupdate!",
-                    "success"
-                  );
-                  if (editProjectModalInstance) editProjectModalInstance.hide();
-                  loadProjects();
-                }
-              });
-
-            loadProjects();
-
-            const addBtn = document.getElementById("addProjectBtn");
-            const addModal = new bootstrap.Modal(
-              document.getElementById("addProjectModal")
-            );
-            addBtn.addEventListener("click", function () {
-              document.getElementById("addProjectForm").reset();
-              addModal.show();
-            });
-
-            document
-              .getElementById("addProjectForm")
-              .addEventListener("submit", async function (e) {
-                e.preventDefault();
-                showGlobalSpinner(); // Spinner global muncul saat proses input
-                const nama = document
-                  .getElementById("projectNama")
-                  .value.trim();
-                const fotoInput = document.getElementById("projectFoto");
-                const keterangan = document
-                  .getElementById("projectKeterangan")
-                  .value.trim();
-                if (!nama || !fotoInput.files[0] || !keterangan) {
-                  hideGlobalSpinner();
-                  Swal.fire("Error", "Semua field wajib diisi!", "error");
-                  return;
-                }
-                // Upload file ke Supabase Storage bucket 'Portofolio' folder 'projects'
-                const file = fotoInput.files[0];
-                const fileExt = file.name.split(".").pop();
-                const fileName = `${Date.now()}_${Math.random()
-                  .toString(36)
-                  .substr(2, 8)}.${fileExt}`;
-                const filePath = `projects/${fileName}`;
-                const { data: uploadData, error: uploadError } =
-                  await supabase.storage
-                    .from("Portofolio")
-                    .upload(filePath, file);
-                if (uploadError) {
-                  hideGlobalSpinner();
-                  Swal.fire(
-                    "Gagal",
-                    `Gagal upload foto! ${uploadError.message || ""}`,
-                    "error"
-                  );
-                  return;
-                }
-                // Ambil public URL
-                const { data: publicUrlData, error: publicUrlError } =
-                  supabase.storage.from("Portofolio").getPublicUrl(filePath);
-                if (
-                  publicUrlError ||
-                  !publicUrlData ||
-                  !publicUrlData.publicUrl
-                ) {
-                  hideGlobalSpinner();
-                  Swal.fire(
-                    "Gagal",
-                    `Gagal ambil public URL! ${
-                      publicUrlError ? publicUrlError.message : ""
-                    }`,
-                    "error"
-                  );
-                  return;
-                }
-                const fotoUrl = publicUrlData.publicUrl;
-                // Simpan ke database
-                const { error } = await supabase
-                  .from("tbl_project")
-                  .insert([{ nama, foto: fotoUrl, keterangan }]);
-                if (error) {
-                  hideGlobalSpinner();
-                  Swal.fire("Gagal", "Gagal menambah project!", "error");
-                } else {
-                  hideGlobalSpinner();
-                  Swal.fire(
-                    "Berhasil",
-                    "Project berhasil ditambahkan!",
-                    "success"
-                  );
-                  addModal.hide();
-                  loadProjects();
-                }
-              });
-          });
-        </script>
-      </main>
+<body oncontextmenu="return false;">
+  <script>
+    document.addEventListener('contextmenu', e => e.preventDefault());
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && e.key === 'I') ||
+        (e.ctrlKey && e.shiftKey && e.key === 'J') || (e.ctrlKey && e.key === 'u') ||
+        (e.ctrlKey && e.key === 's')) { e.preventDefault(); return false; }
+    });
+  </script>
+  <!-- Sidebar -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+      <div class="logo-icon">R</div>
+      <span class="logo-text">Portfolio Admin</span>
     </div>
-    <!-- Spinner global untuk proses hapus, input, dan edit -->
-    <div
-      id="globalProcessSpinner"
-      style="
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100vw;
-        height: 100vh;
-        z-index: 9999;
-        background: rgba(255, 255, 255, 0.5);
-        align-items: center;
-        justify-content: center;
-      "
-    >
-      <div
-        class="spinner-border text-primary"
-        role="status"
-        style="width: 3rem; height: 3rem"
-      >
-        <span class="visually-hidden">Loading...</span>
+    <nav class="sidebar-nav">
+      <div class="nav-section">
+        <div class="nav-section-title">Main Menu</div>
+        <a href="dashboard.html" class="nav-item"><i class="bi bi-grid-1x2"></i><span>Dashboard</span></a>
+        <a href="project.html" class="nav-item active"><i class="bi bi-folder"></i><span>Projects</span></a>
+        <a href="certificate.html" class="nav-item"><i class="bi bi-award"></i><span>Certificates</span></a>
+        <a href="galeri.html" class="nav-item"><i class="bi bi-images"></i><span>Gallery</span></a>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-title">Quick Links</div>
+        <a href="index.html" class="nav-item" target="_blank"><i class="bi bi-globe"></i><span>View Portfolio</span></a>
+      </div>
+    </nav>
+    <div class="sidebar-footer">
+      <a href="#" class="nav-item" id="logoutBtn"><i class="bi bi-box-arrow-left"></i><span>Logout</span></a>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <header class="dashboard-header">
+      <div class="header-left">
+        <button class="menu-toggle" id="menuToggle"><i class="bi bi-list"></i></button>
+        <h1 class="page-title">Projects</h1>
+      </div>
+      <div class="header-right">
+        <div class="user-profile">
+          <div class="user-avatar" id="userAvatar">A</div>
+          <div class="user-info">
+            <span class="user-name" id="userName">Admin</span>
+            <span class="user-role">Administrator</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="dashboard-content">
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">Manage Projects</h3>
+          <button class="btn btn-primary" onclick="openModal()">
+            <i class="bi bi-plus"></i> Add Project
+          </button>
+        </div>
+        <div class="card-body">
+          <div class="items-grid" id="projectsGrid"></div>
+          <div class="empty-state" id="emptyState" style="display:none;">
+            <div class="empty-icon"><i class="bi bi-folder"></i></div>
+            <h3 class="empty-title">No Projects Yet</h3>
+            <p class="empty-text">Add your first project to showcase your work</p>
+            <button class="btn btn-primary" onclick="openModal()"><i class="bi bi-plus"></i> Add Project</button>
+          </div>
+        </div>
       </div>
     </div>
-    <script src="dashboard/js/dashboard.js"></script>
-    <script src="bootstrap/js/bootstrap.min.js"></script>
-  </body>
+  </main>
+
+  <!-- Modal -->
+  <div class="modal" id="projectModal">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3 class="modal-title" id="modalTitle">Add Project</h3>
+        <button class="modal-close" onclick="closeModal()"><i class="bi bi-x"></i></button>
+      </div>
+      <div class="modal-body">
+        <form id="projectForm">
+          <input type="hidden" id="projectId" />
+          <input type="hidden" id="existingFoto" />
+          <div class="form-group">
+            <label class="form-label">Nama Project</label>
+            <input type="text" class="form-control" id="projectNama" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Keterangan</label>
+            <textarea class="form-control" id="projectKeterangan" rows="3"></textarea>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Upload Foto</label>
+            <div class="file-upload" id="fotoUpload">
+              <input type="file" id="projectFoto" accept="image/*" onchange="previewFile(this)" />
+              <i class="bi bi-cloud-upload"></i>
+              <span>Click or drag image here</span>
+              <img id="fotoPreview" class="file-preview" />
+              <div id="fileName" class="file-name"></div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+        <button class="btn btn-primary" id="saveBtn" onclick="saveProject()">Save Project</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const SUPABASE_URL = 'https://swsqdksyabjbafmuxljx.supabase.co';
+    const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InN3c3Fka3N5YWJqYmFmbXV4bGp4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTYxODU2MDEsImV4cCI6MjA3MTc2MTYwMX0.P1vKqCAkQD5F9O5mBqph0z-eyJ508I8-lOJs_0muchk';
+    const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+    const adminName = localStorage.getItem('adminName') || 'Admin';
+    document.getElementById('userName').textContent = adminName;
+    document.getElementById('userAvatar').textContent = adminName.charAt(0).toUpperCase();
+
+    document.getElementById('menuToggle').addEventListener('click', () => {
+      document.getElementById('sidebar').classList.toggle('open');
+    });
+
+    document.getElementById('logoutBtn').addEventListener('click', (e) => {
+      e.preventDefault();
+      localStorage.removeItem('adminName');
+      window.location.href = 'login.html';
+    });
+
+    // Preview file before upload
+    function previewFile(input) {
+      const preview = document.getElementById('fotoPreview');
+      const fileName = document.getElementById('fileName');
+
+      if (input.files && input.files[0]) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          preview.src = e.target.result;
+          preview.style.display = 'block';
+        };
+        reader.readAsDataURL(input.files[0]);
+        fileName.textContent = input.files[0].name;
+      }
+    }
+
+    // Upload file to Supabase Storage
+    async function uploadFile(file, folder) {
+      const fileExt = file.name.split('.').pop();
+      const fileName = `${Date.now()}_${Math.random().toString(36).substr(2, 9)}.${fileExt}`;
+      const filePath = `${folder}/${fileName}`;
+
+      const { data, error } = await sb.storage
+        .from('Portofolio')
+        .upload(filePath, file);
+
+      if (error) {
+        console.error('Upload error:', error);
+        throw error;
+      }
+
+      // Get public URL
+      const { data: urlData } = sb.storage
+        .from('Portofolio')
+        .getPublicUrl(filePath);
+
+      return urlData.publicUrl;
+    }
+
+    async function loadProjects() {
+      const { data, error } = await sb.from('tbl_project').select('*').order('id', { ascending: false });
+      const grid = document.getElementById('projectsGrid');
+      const empty = document.getElementById('emptyState');
+
+      if (!data || data.length === 0) {
+        grid.innerHTML = '';
+        empty.style.display = 'block';
+        return;
+      }
+
+      empty.style.display = 'none';
+      grid.innerHTML = data.map(p => `
+          <div class="item-card">
+            <img src="${p.foto || 'https://via.placeholder.com/400x200'}" alt="${p.nama}" class="item-image" />
+            <div class="item-content">
+              <h4 class="item-title">${p.nama}</h4>
+              <p class="item-description">${p.keterangan || 'No description'}</p>
+            </div>
+            <div class="item-actions">
+              <button class="btn btn-secondary btn-sm" onclick="editProject(${p.id})"><i class="bi bi-pencil"></i> Edit</button>
+              <button class="btn btn-danger btn-sm" onclick="deleteProject(${p.id})"><i class="bi bi-trash"></i> Delete</button>
+            </div>
+          </div>
+        `).join('');
+    }
+
+    function openModal(project = null) {
+      document.getElementById('projectModal').classList.add('show');
+      document.getElementById('modalTitle').textContent = project ? 'Edit Project' : 'Add Project';
+      document.getElementById('fotoPreview').style.display = 'none';
+      document.getElementById('fileName').textContent = '';
+      document.getElementById('projectFoto').value = '';
+
+      if (project) {
+        document.getElementById('projectId').value = project.id;
+        document.getElementById('projectNama').value = project.nama || '';
+        document.getElementById('projectKeterangan').value = project.keterangan || '';
+        document.getElementById('existingFoto').value = project.foto || '';
+        if (project.foto) {
+          document.getElementById('fotoPreview').src = project.foto;
+          document.getElementById('fotoPreview').style.display = 'block';
+          document.getElementById('fileName').textContent = 'Current image (select new to replace)';
+        }
+      } else {
+        document.getElementById('projectForm').reset();
+        document.getElementById('projectId').value = '';
+        document.getElementById('existingFoto').value = '';
+      }
+    }
+
+    function closeModal() {
+      document.getElementById('projectModal').classList.remove('show');
+    }
+
+    async function editProject(id) {
+      const { data } = await sb.from('tbl_project').select('*').eq('id', id).single();
+      if (data) openModal(data);
+    }
+
+    async function saveProject() {
+      const saveBtn = document.getElementById('saveBtn');
+      saveBtn.disabled = true;
+      saveBtn.innerHTML = '<i class="bi bi-arrow-repeat"></i> Saving...';
+
+      try {
+        const id = document.getElementById('projectId').value;
+        const fileInput = document.getElementById('projectFoto');
+        let fotoUrl = document.getElementById('existingFoto').value;
+
+        // Upload new file if selected
+        if (fileInput.files && fileInput.files[0]) {
+          fotoUrl = await uploadFile(fileInput.files[0], 'projects');
+        }
+
+        const projectData = {
+          nama: document.getElementById('projectNama').value,
+          keterangan: document.getElementById('projectKeterangan').value,
+          foto: fotoUrl
+        };
+
+        let error;
+        if (id) {
+          ({ error } = await sb.from('tbl_project').update(projectData).eq('id', id));
+        } else {
+          ({ error } = await sb.from('tbl_project').insert([projectData]));
+        }
+
+        if (error) {
+          Swal.fire('Error', error.message, 'error');
+        } else {
+          Swal.fire('Success', id ? 'Project updated!' : 'Project added!', 'success');
+          closeModal();
+          loadProjects();
+        }
+      } catch (err) {
+        Swal.fire('Error', 'Failed to upload file: ' + err.message, 'error');
+      }
+
+      saveBtn.disabled = false;
+      saveBtn.innerHTML = 'Save Project';
+    }
+
+    async function deleteProject(id) {
+      const result = await Swal.fire({
+        title: 'Delete Project?',
+        text: 'This action cannot be undone.',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#ef4444',
+        confirmButtonText: 'Delete'
+      });
+
+      if (result.isConfirmed) {
+        const { error } = await sb.from('tbl_project').delete().eq('id', id);
+        if (error) {
+          Swal.fire('Error', error.message, 'error');
+        } else {
+          Swal.fire('Deleted', 'Project deleted.', 'success');
+          loadProjects();
+        }
+      }
+    }
+
+    loadProjects();
+  </script>
+
+  <button class="theme-toggle" id="themeToggle"><i class="bi bi-moon-fill"></i><i class="bi bi-sun-fill"></i></button>
+  <script>
+    (function () {
+      const t = document.getElementById('themeToggle'), h = document.documentElement;
+      if (localStorage.getItem('theme') === 'dark') h.setAttribute('data-theme', 'dark');
+      t.addEventListener('click', () => { const n = h.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'; h.setAttribute('data-theme', n); localStorage.setItem('theme', n); });
+    })();
+  </script>
+</body>
+
 </html>

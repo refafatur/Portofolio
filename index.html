@@ -3,18 +3,21 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Portofolio</title>
-    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" />
+    <title>Muhammad Refa Fatur Rahman - Portfolio</title>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css"
     />
-    <link rel="stylesheet" href="style.css" />
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css"
     />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
     <link rel="icon" href="image/logo.png" type="image/x-icon" />
+    <link rel="stylesheet" href="style-new.css" />
     <!-- Supabase JS CDN -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
     <!-- AOS CSS -->
@@ -24,648 +27,611 @@
     />
   </head>
 
-  <style>
-    .container-skill {
-      overflow: hidden;
-      white-space: nowrap;
-      position: relative;
-      width: 100%;
-      background-color: transparent;
-      padding: 20px 0;
-    }
-    .scrolling-row {
-      display: inline-flex;
-      animation: scroll-horizontal 15s linear infinite;
-    }
-    .icon-box {
-      text-align: center;
-      margin: 0 20px;
-    }
-    .icon-box i {
-      font-size: 3rem;
-    }
-    /* Animasi scrolling */
-    @keyframes scroll-horizontal {
-      0% {
-        transform: translateX(100%);
-      }
-      100% {
-        transform: translateX(-100%);
-      }
-    }
+  <body oncontextmenu="return false;">
+    <!-- Anti Inspect Script -->
+    <script>
+      // Disable right-click
+      document.addEventListener("contextmenu", (e) => e.preventDefault());
 
-    .text-3xl {
-      font-size: 2rem;
-    }
-    .md\:text-4xl {
-      font-size: 2.5rem;
-    }
-    .text-center {
-      text-align: center;
-      margin: 10px 0;
-    }
-    .text-blue-400 {
-      color: #60a5fa;
-    }
-    .text-blue-500 {
-      color: #3b82f6;
-    }
-    .text-red-500 {
-      color: #ef4444;
-    }
-    .text-yellow-400 {
-      color: #facc15;
-    }
-    .text-green-500 {
-      color: #22c55e;
-    }
-    .text-purple-500 {
-      color: #a855f7;
-    }
-  </style>
-
-  <body>
-    <header class="header navbar navbar-expand-lg navbar-dark fixed-top">
-      <div class="container-fluid">
-        <a href="#home" class="navbar-brand logo">
-          Muhammad Refa <span>Fatur Rahman</span>
+      // Disable keyboard shortcuts
+      document.addEventListener("keydown", function (e) {
+        // Disable F12
+        if (e.key === "F12") {
+          e.preventDefault();
+          return false;
+        }
+        // Disable Ctrl+Shift+I (Inspect)
+        if (e.ctrlKey && e.shiftKey && e.key === "I") {
+          e.preventDefault();
+          return false;
+        }
+        // Disable Ctrl+Shift+J (Console)
+        if (e.ctrlKey && e.shiftKey && e.key === "J") {
+          e.preventDefault();
+          return false;
+        }
+        // Disable Ctrl+U (View Source)
+        if (e.ctrlKey && e.key === "u") {
+          e.preventDefault();
+          return false;
+        }
+        // Disable Ctrl+S (Save)
+        if (e.ctrlKey && e.key === "s") {
+          e.preventDefault();
+          return false;
+        }
+      });
+    </script>
+    <!-- Header / Navigation -->
+    <header class="header" id="header">
+      <nav class="nav container">
+        <a href="#home" class="nav-logo">
+          <!-- <span class="logo-icon">R</span> -->
+          <span class="logo-text">Refa</span>
         </a>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNav"
-          aria-controls="navbarNav"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav ms-auto">
+
+        <div class="nav-menu" id="nav-menu">
+          <ul class="nav-list">
             <li class="nav-item">
-              <a href="#home" class="nav-link">Home</a>
+              <a href="#home" class="nav-link active">Home</a>
             </li>
             <li class="nav-item">
-              <a href="#about" class="nav-link">About Me</a>
+              <a href="#about" class="nav-link">About</a>
+            </li>
+            <li class="nav-item">
+              <a href="#services" class="nav-link">Services</a>
             </li>
             <li class="nav-item">
               <a href="#project" class="nav-link">Project</a>
             </li>
             <li class="nav-item">
-              <a href="#skill" class="nav-link">Skill</a>
+              <a href="#skill" class="nav-link">Skills</a>
             </li>
             <li class="nav-item">
-              <a href="#serti" class="nav-link">Sertificate</a>
-            </li>
-            <li class="nav-item">
-              <a href="#contact" class="nav-link">Contact Me</a>
+              <a href="#contact" class="nav-link">Contact</a>
             </li>
           </ul>
+          <div class="nav-close" id="nav-close">
+            <i class="bi bi-x"></i>
+          </div>
         </div>
-      </div>
+
+        <div class="nav-buttons">
+          <a
+            href="CV_Muhammad-Refa-Fatur-Rahman.pdf"
+            class="btn-download"
+            download
+          >
+            <i class="bi bi-download"></i> Download CV
+          </a>
+        </div>
+
+        <div class="nav-toggle" id="nav-toggle">
+          <i class="bi bi-list"></i>
+        </div>
+      </nav>
     </header>
 
-    <section
-      class="home d-flex align-items-center"
-      id="home"
-      data-aos="fade-up"
-    >
-      <div class="container">
-        <div class="row">
-          <div class="col-md-6 d-flex flex-column justify-content-center">
-            <div class="home-content">
-              <h1>Hi, It's <span>Refa</span></h1>
-              <h3 class="text-animation">I'm a <span></span></h3>
-              <p>
-                I'm an Informatics student at University Binaniaga Indonesia who
-                likes design and technology
-              </p>
-              <!--                         <p id="profile-view-count" class="bi bi-person"></p> -->
-            </div>
-            <div class="social-icon">
-              <a
-                href="https://www.instagram.com/refafatur_/?utm_source=ig_web_button_share_sheet"
-                style="--i: 1"
-                ><i class="bi bi-instagram"></i
-              ></a>
-              <a
-                href="https://www.tiktok.com/@_sixtpy?_t=ZS-8tAMrs1T3Lz&_r=1"
-                style="--i: 2"
-                ><i class="bi bi-tiktok"></i
-              ></a>
-              <a
-                href="https://www.linkedin.com/in/muhammad-refa-fatur-rahman/"
-                style="--i: 3"
-                ><i class="bi bi-linkedin"></i
-              ></a>
-              <a href="https://github.com/refafatur" style="--i: 4"
-                ><i class="bi bi-github"></i
-              ></a>
-            </div>
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+      <div class="hero-bg-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="circle-deco circle-1"></div>
+        <div class="circle-deco circle-2"></div>
+      </div>
 
-            <div class="container-skill">
-              <div class="scrolling-row">
-                <div class="icon-box">
-                  <i class="devicon-php-plain text-blue-400"></i>
-                </div>
-                <div class="icon-box">
-                  <i class="devicon-laravel-plain text-red-500"></i>
-                </div>
-                <div class="icon-box">
-                  <i class="devicon-javascript-plain text-yellow-400"></i>
-                </div>
-                <div class="icon-box">
-                  <i class="devicon-nodejs-plain text-green-500"></i>
-                </div>
-                <div class="icon-box">
-                  <i class="devicon-mysql-plain text-blue-400"></i>
-                </div>
-                <div class="icon-box">
-                  <i class="devicon-firebase-plain text-blue-400"></i>
-                </div>
-                <div class="icon-box">
-                  <i class="devicon-flutter-plain text-blue-500"></i>
-                </div>
-                <div class="icon-box">
-                  <i class="devicon-android-plain text-blue-500"></i>
-                </div>
-                <div class="icon-box">
-                  <i class="devicon-css3-plain text-blue-500"></i>
-                </div>
-                <div class="icon-box">
-                  <i class="devicon-bootstrap-plain text-purple-500"></i>
-                </div>
-              </div>
-            </div>
+      <div class="container hero-container">
+        <div
+          class="hero-content"
+          data-aos="fade-right"
+          data-aos-duration="1000"
+        >
+          <span class="hero-subtitle">HELLO I AM</span>
+          <h1 class="hero-title">
+            Muhammad Refa<br />
+            <span class="gradient-text">Fatur Rahman</span>
+          </h1>
+          <p class="hero-roles">
+            <span class="role-typing"></span>
+          </p>
+          <p class="hero-description">
+            I'm an Informatics student at University Binaniaga Indonesia who
+            likes design and technology
+          </p>
 
-            <div class="btn-group">
-              <a href="#contact" class="btn btn-primary">Contact Me</a>
-            </div>
-            <div class="btn-group">
-              <a
-                href="CV_Muhammad-Refa-Fatur-Rahman.pdf"
-                class="btn btn-secondary"
-                download
-                >Download CV</a
-              >
+          <div class="hero-buttons">
+            <a href="#contact" class="btn btn-primary">
+              <span>Start Consulting</span>
+            </a>
+            <div class="availability-badge">
+              <span class="pulse"></span>
+              Available for Freelance
             </div>
           </div>
-          <div class="col-md-6 d-flex justify-content-center">
-            <div class="home-img">
+        </div>
+
+        <div class="hero-image" data-aos="fade-left" data-aos-duration="1000">
+          <div class="image-wrapper">
+            <div class="image-border"></div>
+            <img
+              src="image/me3.jpeg"
+              alt="Muhammad Refa Fatur Rahman"
+              class="profile-img"
+            />
+            <div class="floating-ring ring-1"></div>
+            <div class="floating-ring ring-2"></div>
+          </div>
+
+          <div class="stats-card" data-aos="zoom-in" data-aos-delay="500">
+            <div class="stats-number">5+</div>
+            <div class="stats-text">
+              Projects<br />
+              Completed
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+      <div class="container about-container">
+        <div class="about-content" data-aos="fade-right">
+          <span class="section-subtitle">ABOUT ME</span>
+          <h2 class="section-title">About Me</h2>
+          <p class="about-intro">I like creating a cool design project.</p>
+
+          <div class="about-buttons">
+            <a
+              href="CV_Muhammad-Refa-Fatur-Rahman.pdf"
+              class="btn btn-primary"
+              download
+            >
+              <i class="bi bi-download"></i> Download CV
+            </a>
+            <div class="social-icons">
+              <a
+                href="https://www.instagram.com/refafatur_/"
+                target="_blank"
+                class="social-icon"
+              >
+                <i class="bi bi-instagram"></i>
+              </a>
+              <a
+                href="https://github.com/refafatur"
+                target="_blank"
+                class="social-icon"
+              >
+                <i class="bi bi-github"></i>
+              </a>
+              <a
+                href="https://www.linkedin.com/in/muhammad-refa-fatur-rahman/"
+                target="_blank"
+                class="social-icon"
+              >
+                <i class="bi bi-linkedin"></i>
+              </a>
+              <a
+                href="https://www.tiktok.com/@_sixtpy"
+                target="_blank"
+                class="social-icon"
+              >
+                <i class="bi bi-tiktok"></i>
+              </a>
+            </div>
+          </div>
+
+          <div class="about-info">
+            <div class="info-item">
+              <span class="info-label">Age:</span>
+              <span class="info-value">21</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">Residence:</span>
+              <span class="info-value">Indonesia</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">Address:</span>
+              <span class="info-value">Bogor, Jawa Barat</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">E-mail:</span>
+              <span class="info-value">refafatur97@gmail.com</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">Phone:</span>
+              <span class="info-value">+62 813 1749 0001</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">Freelance:</span>
+              <span class="info-value status-available">Available</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="about-right" data-aos="fade-left">
+          <div class="about-text">
+            <p>
+              Halo, saya Muhammad Refa Fatur Rahman, Mahasiswa Teknik
+              Informatika di Universitas Binaniaga Indonesia. Saya berfokus pada
+              pengembangan web dan aplikasi mobile sebagai Fullstack Developer,
+              dengan pengalaman mendalam di kedua sisi front-end dan back-end.
+            </p>
+            <div class="signature">
               <img
-                src="image/refa.jpeg"
-                alt="Profile Image"
-                loading="lazy"
-                data-aos="fade-up"
+                src="image/logo.png"
+                alt="Signature"
+                class="signature-img"
+                style="
+                  width: 80px;
+                  filter: drop-shadow(0 0 5px rgba(108, 99, 255, 0.5));
+                "
               />
             </div>
           </div>
-        </div>
-      </div>
-    </section>
 
-    <section class="about" id="about" data-aos="fade-up">
-      <div class="container text-center">
-        <div class="content-about">
-          <h2>About Me</h2>
-          <p>
-            Halo, saya Muhammad Refa Fatur Rahman, Mahasiswa semester 5 Teknik
-            Informatika di Universitas Binaniaga Indonesia. Saya berfokus pada
-            pengembangan web dan aplikasi mobile sebagai Fullstack Developer,
-            dengan pengalaman mendalam di kedua sisi front-end dan back-end.
-            Saya menguasai teknologi front-end seperti HTML, CSS, dan Bootstrap
-            untuk menciptakan antarmuka yang interaktif, responsif, dan
-            user-friendly. Di sisi back-end, saya berpengalaman menggunakan
-            Express.js dan PHP untuk membangun aplikasi yang efisien dan
-            scalable. Selain itu, saya juga berpengalaman dalam pengembangan
-            aplikasi mobile menggunakan Flutter dan pengelolaan backend
-            menggunakan Firebase untuk autentikasi dan penyimpanan data secara
-            real-time. Saya juga memiliki keterampilan dalam desain grafis
-            menggunakan Canva, serta penguasaan JavaScript, Node.js, dan Git
-            untuk mendukung kolaborasi tim dan manajemen proyek. Saya
-            berkomitmen untuk terus belajar dan menghadirkan solusi digital yang
-            relevan, inovatif, dan efektif dalam setiap proyek yang saya
-            kerjakan.
-          </p>
-        </div>
-      </div>
-    </section>
-    <section class="project" id="project" data-aos="fade-up">
-      <div class="container-fluid">
-        <h2 class="mb-5">My Project</h2>
-        <div class="row justify-content-center" id="project-list">
-          <!-- Project cards will be injected here by JS -->
-        </div>
-      </div>
-    </section>
-    <section class="skill" id="skill" data-aos="fade-up">
-      <div class="container text-center">
-        <h2>My Skills</h2>
-        <div
-          class="row"
-          style="
-            display: flex;
-            flex-wrap: wrap;
-            gap: 2rem;
-            justify-content: center;
-          "
-        >
-          <div
-            class="card"
-            style="text-align: center; padding: 20px; width: 150px"
-          >
-            <i
-              class="devicon-php-plain text-blue-400"
-              style="font-size: 4rem"
-            ></i>
-            <p class="card-title" style="margin-top: 10px">PHP</p>
-          </div>
-          <div
-            class="card"
-            style="text-align: center; padding: 20px; width: 150px"
-          >
-            <i
-              class="devicon-laravel-plain text-red-500"
-              style="font-size: 4rem"
-            ></i>
-            <p class="card-title" style="margin-top: 10px">Laravel</p>
-          </div>
-          <div
-            class="card"
-            style="text-align: center; padding: 20px; width: 150px"
-          >
-            <i
-              class="devicon-javascript-plain text-yellow-400"
-              style="font-size: 4rem"
-            ></i>
-            <p class="card-title" style="margin-top: 10px">JavaScript</p>
-          </div>
-          <div
-            class="card"
-            style="text-align: center; padding: 20px; width: 150px"
-          >
-            <i
-              class="devicon-nodejs-plain text-green-500"
-              style="font-size: 4rem"
-            ></i>
-            <p class="card-title" style="margin-top: 10px">Node.js</p>
-          </div>
-          <div
-            class="card"
-            style="text-align: center; padding: 20px; width: 150px"
-          >
-            <i
-              class="devicon-mysql-plain text-blue-400"
-              style="font-size: 4rem"
-            ></i>
-            <p class="card-title" style="margin-top: 10px">MySQL</p>
-          </div>
-          <div
-            class="card"
-            style="text-align: center; padding: 20px; width: 150px"
-          >
-            <i
-              class="devicon-firebase-plain text-blue-400"
-              style="font-size: 4rem"
-            ></i>
-            <p class="card-title" style="margin-top: 10px">Firebase</p>
-          </div>
-          <div
-            class="card"
-            style="text-align: center; padding: 20px; width: 150px"
-          >
-            <i
-              class="devicon-flutter-plain text-blue-500"
-              style="font-size: 4rem"
-            ></i>
-            <p class="card-title" style="margin-top: 10px">Flutter</p>
-          </div>
-          <div
-            class="card"
-            style="text-align: center; padding: 20px; width: 150px"
-          >
-            <i
-              class="devicon-android-plain text-blue-500"
-              style="font-size: 4rem"
-            ></i>
-            <p class="card-title" style="margin-top: 10px">Android</p>
-          </div>
-          <div
-            class="card"
-            style="text-align: center; padding: 20px; width: 150px"
-          >
-            <i
-              class="devicon-css3-plain text-blue-500"
-              style="font-size: 4rem"
-            ></i>
-            <p class="card-title" style="margin-top: 10px">CSS</p>
-          </div>
-          <div
-            class="card"
-            style="text-align: center; padding: 20px; width: 150px"
-          >
-            <i
-              class="devicon-bootstrap-plain text-purple-500"
-              style="font-size: 4rem"
-            ></i>
-            <p class="card-title" style="margin-top: 10px">Bootstrap</p>
-          </div>
-        </div>
-      </div>
-    </section>
+          <div class="skills-grid">
+            <div class="skill-card" data-aos="zoom-in" data-aos-delay="100">
+              <div class="skill-progress" data-progress="85">
+                <svg class="progress-ring" viewBox="0 0 100 100">
+                  <circle class="progress-bg" cx="50" cy="50" r="45" />
+                  <circle
+                    class="progress-bar"
+                    cx="50"
+                    cy="50"
+                    r="45"
+                    style="stroke-dashoffset: calc(283 - (283 * 85) / 100)"
+                  />
+                </svg>
+                <span class="skill-percent">85%</span>
+              </div>
+              <span class="skill-name">Frontend</span>
+            </div>
 
-    <section class="project" id="gallery" data-aos="fade-up">
-      <div class="container text-center">
-        <h2>My Galery</h2>
-        <div
-          class="row"
-          id="random-gallery"
-          style="
-            display: flex;
-            flex-wrap: wrap;
-            gap: 2rem;
-            justify-content: center;
-          "
-        >
-          <!-- Gallery images will be injected here by JS -->
-        </div>
-      </div>
-    </section>
+            <div class="skill-card" data-aos="zoom-in" data-aos-delay="200">
+              <div class="skill-progress" data-progress="75">
+                <svg class="progress-ring" viewBox="0 0 100 100">
+                  <circle class="progress-bg" cx="50" cy="50" r="45" />
+                  <circle
+                    class="progress-bar purple"
+                    cx="50"
+                    cy="50"
+                    r="45"
+                    style="stroke-dashoffset: calc(283 - (283 * 75) / 100)"
+                  />
+                </svg>
+                <span class="skill-percent">75%</span>
+              </div>
+              <span class="skill-name">Backend</span>
+            </div>
 
-    <section class="project" id="serti" data-aos="fade-up">
-      <div class="container text-center">
-        <h2>My Certificates</h2>
-        <div
-          class="row"
-          id="certificate-list"
-          style="
-            display: flex;
-            flex-wrap: wrap;
-            gap: 2rem;
-            justify-content: center;
-          "
-        >
-          <!-- Certificate cards will be injected here by JS -->
-        </div>
-      </div>
-    </section>
+            <div class="skill-card" data-aos="zoom-in" data-aos-delay="300">
+              <div class="skill-progress" data-progress="70">
+                <svg class="progress-ring" viewBox="0 0 100 100">
+                  <circle class="progress-bg" cx="50" cy="50" r="45" />
+                  <circle
+                    class="progress-bar"
+                    cx="50"
+                    cy="50"
+                    r="45"
+                    style="stroke-dashoffset: calc(283 - (283 * 70) / 100)"
+                  />
+                </svg>
+                <span class="skill-percent">70%</span>
+              </div>
+              <span class="skill-name">Mobile Dev</span>
+            </div>
 
-    <section id="contact" class="contact" data-aos="fade-up">
-      <div class="container text-center">
-        <h2>Contact Me</h2>
-        <h3 class="mb-4">
-          Have a question or need assistance? Feel free to contact me via
-          WhatsApp!
-        </h3>
-        <div class="text-center">
-          <a
-            href="https://wa.me/6281317490001"
-            target="_blank"
-            class="btn btn-primary"
-            >Send Message</a
-          >
-        </div>
-      </div>
-    </section>
-
-    <footer class="footer" data-aos="fade-up">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12 footer-contact">
-            <div class="social-links text-center">
-              <a
-                href="https://www.instagram.com/refafatur_/?utm_source=ig_web_button_share_sheet"
-                ><i class="bi bi-instagram"></i
-              ></a>
-              <a href="https://www.tiktok.com/@_sixtpy?_t=ZS-8tAMrs1T3Lz&_r=1"
-                ><i class="bi bi-tiktok"></i
-              ></a>
-              <a href="https://www.linkedin.com/in/muhammad-refa-fatur-rahman/"
-                ><i class="bi bi-linkedin"></i
-              ></a>
-              <a href="https://github.com/refafatur"
-                ><i class="bi bi-github"></i
-              ></a>
+            <div class="skill-card" data-aos="zoom-in" data-aos-delay="400">
+              <div class="skill-progress" data-progress="80">
+                <svg class="progress-ring" viewBox="0 0 100 100">
+                  <circle class="progress-bg" cx="50" cy="50" r="45" />
+                  <circle
+                    class="progress-bar purple"
+                    cx="50"
+                    cy="50"
+                    r="45"
+                    style="stroke-dashoffset: calc(283 - (283 * 80) / 100)"
+                  />
+                </svg>
+                <span class="skill-percent">80%</span>
+              </div>
+              <span class="skill-name">UI/UX Design</span>
             </div>
           </div>
         </div>
-        <div class="footer-bottom">
-          <p>&copy; 2024 Muhammad Refa Fatur Rahman.</p>
+      </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+      <div class="container">
+        <div class="section-header" data-aos="fade-up">
+          <span class="section-subtitle">WHAT I DO</span>
+          <h2 class="section-title">Our Services</h2>
+        </div>
+
+        <div class="services-grid">
+          <div class="service-card" data-aos="fade-up" data-aos-delay="100">
+            <div class="service-icon">
+              <i class="bi bi-code-slash"></i>
+            </div>
+            <h3 class="service-title">Web Development</h3>
+            <p class="service-desc">
+              Building responsive and modern websites using HTML, CSS,
+              JavaScript, PHP, Laravel, and Node.js
+            </p>
+            <a href="#contact" class="service-link">
+              Learn More <i class="bi bi-arrow-right"></i>
+            </a>
+          </div>
+
+          <div
+            class="service-card featured"
+            data-aos="fade-up"
+            data-aos-delay="200"
+          >
+            <div class="service-icon">
+              <i class="bi bi-phone"></i>
+            </div>
+            <h3 class="service-title">Mobile App Development</h3>
+            <p class="service-desc">
+              Creating cross-platform mobile applications using Flutter and
+              Firebase for iOS and Android
+            </p>
+            <a href="#contact" class="service-link">
+              Learn More <i class="bi bi-arrow-right"></i>
+            </a>
+          </div>
+
+          <div class="service-card" data-aos="fade-up" data-aos-delay="300">
+            <div class="service-icon">
+              <i class="bi bi-palette"></i>
+            </div>
+            <h3 class="service-title">UI/UX Design</h3>
+            <p class="service-desc">
+              Designing user-friendly interfaces with modern aesthetics using
+              Canva and design principles
+            </p>
+            <a href="#contact" class="service-link">
+              Learn More <i class="bi bi-arrow-right"></i>
+            </a>
+          </div>
+
+          <div class="service-card" data-aos="fade-up" data-aos-delay="400">
+            <div class="service-icon">
+              <i class="bi bi-database"></i>
+            </div>
+            <h3 class="service-title">Database Management</h3>
+            <p class="service-desc">
+              Managing and optimizing databases with MySQL, Firebase, and
+              Supabase for scalable applications
+            </p>
+            <a href="#contact" class="service-link">
+              Learn More <i class="bi bi-arrow-right"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="projects" id="project">
+      <div class="container">
+        <div class="section-header" data-aos="fade-up">
+          <span class="section-subtitle">MY WORK</span>
+          <h2 class="section-title">My Projects</h2>
+        </div>
+
+        <div class="projects-grid" id="project-list">
+          <!-- Projects will be loaded from Supabase -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="skills" id="skill">
+      <div class="container">
+        <div class="section-header" data-aos="fade-up">
+          <span class="section-subtitle">MY EXPERTISE</span>
+          <h2 class="section-title">My Skills</h2>
+        </div>
+
+        <div class="skills-icons-grid" data-aos="fade-up">
+          <div class="skill-icon-card">
+            <i class="devicon-php-plain"></i>
+            <span>PHP</span>
+          </div>
+          <div class="skill-icon-card">
+            <i class="devicon-laravel-original"></i>
+            <span>Laravel</span>
+          </div>
+          <div class="skill-icon-card">
+            <i class="devicon-javascript-plain"></i>
+            <span>JavaScript</span>
+          </div>
+          <div class="skill-icon-card">
+            <i class="devicon-nodejs-plain"></i>
+            <span>Node.js</span>
+          </div>
+          <div class="skill-icon-card">
+            <i class="devicon-mysql-plain"></i>
+            <span>MySQL</span>
+          </div>
+          <div class="skill-icon-card">
+            <i class="devicon-firebase-plain"></i>
+            <span>Firebase</span>
+          </div>
+          <div class="skill-icon-card">
+            <i class="devicon-flutter-plain"></i>
+            <span>Flutter</span>
+          </div>
+          <div class="skill-icon-card">
+            <i class="devicon-android-plain"></i>
+            <span>Android</span>
+          </div>
+          <div class="skill-icon-card">
+            <i class="devicon-css3-plain"></i>
+            <span>CSS3</span>
+          </div>
+          <div class="skill-icon-card">
+            <i class="devicon-bootstrap-plain"></i>
+            <span>Bootstrap</span>
+          </div>
+          <div class="skill-icon-card">
+            <i class="devicon-python-plain"></i>
+            <span>Python</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Certificates Section -->
+    <section class="certificates" id="serti">
+      <div class="container">
+        <div class="section-header" data-aos="fade-up">
+          <span class="section-subtitle">MY ACHIEVEMENTS</span>
+          <h2 class="section-title">My Certificates</h2>
+        </div>
+
+        <div class="certificates-grid" id="certificate-list">
+          <!-- Certificates will be loaded from Supabase -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery" id="gallery">
+      <div class="container">
+        <div class="section-header" data-aos="fade-up">
+          <span class="section-subtitle">MY GALLERY</span>
+          <h2 class="section-title">My Gallery</h2>
+        </div>
+
+        <div class="gallery-grid" id="random-gallery">
+          <!-- Gallery will be loaded from Supabase -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+      <div class="container">
+        <div class="section-header" data-aos="fade-up">
+          <span class="section-subtitle">GET IN TOUCH</span>
+          <h2 class="section-title">Contact Me</h2>
+        </div>
+
+        <div class="contact-content" data-aos="fade-up">
+          <p class="contact-text">
+            Have a question or need assistance? Feel free to contact me via
+            WhatsApp!
+          </p>
+          <a
+            href="https://wa.me/6281317490001"
+            target="_blank"
+            class="btn btn-primary btn-lg"
+          >
+            <i class="bi bi-whatsapp"></i> Send Message
+          </a>
+        </div>
+
+        <div class="contact-cards" data-aos="fade-up">
+          <div class="contact-card">
+            <div class="contact-card-icon">
+              <i class="bi bi-envelope"></i>
+            </div>
+            <h4>Email</h4>
+            <p>refafatur97@gmail.com</p>
+          </div>
+          <div class="contact-card">
+            <div class="contact-card-icon">
+              <i class="bi bi-telephone"></i>
+            </div>
+            <h4>Phone</h4>
+            <p>+62 813 1749 0001</p>
+          </div>
+          <div class="contact-card">
+            <div class="contact-card-icon">
+              <i class="bi bi-geo-alt"></i>
+            </div>
+            <h4>Location</h4>
+            <p>Bogor, Jawa Barat, Indonesia</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-logo">
+            <!-- <span class="logo-icon">R</span> -->
+            <span class="logo-text">Refa</span>
+          </div>
+
+          <div class="footer-social">
+            <a href="https://www.instagram.com/refafatur_/" target="_blank">
+              <i class="bi bi-instagram"></i>
+            </a>
+            <a href="https://www.tiktok.com/@_sixtpy" target="_blank">
+              <i class="bi bi-tiktok"></i>
+            </a>
+            <a
+              href="https://www.linkedin.com/in/muhammad-refa-fatur-rahman/"
+              target="_blank"
+            >
+              <i class="bi bi-linkedin"></i>
+            </a>
+            <a href="https://github.com/refafatur" target="_blank">
+              <i class="bi bi-github"></i>
+            </a>
+          </div>
+
+          <p class="footer-copy">
+            &copy; 2024 Muhammad Refa Fatur Rahman. All Rights Reserved.
+          </p>
         </div>
       </div>
     </footer>
-    <!-- Bubble Chat Floating Button & Box -->
-    <style>
-      #bubble-chat-btn {
-        position: fixed;
-        right: 32px;
-        bottom: 32px;
-        z-index: 9999;
-        background: #3b82f6;
-        color: #fff;
-        border-radius: 50%;
-        width: 60px;
-        height: 60px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
-        cursor: pointer;
-        font-size: 2rem;
-        border: none;
-      }
-      #bubble-chat-box {
-        position: fixed;
-        right: 32px;
-        bottom: 100px;
-        z-index: 9999;
-        width: 350px;
-        max-width: 95vw;
-        background: #fff;
-        border-radius: 16px;
-        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
-        border: 1px solid #ddd;
-        display: none;
-        flex-direction: column;
-        overflow: hidden;
-      }
-      #bubble-chat-header {
-        background: #3b82f6;
-        color: #fff;
-        padding: 12px 20px;
-        font-weight: bold;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-      }
-      #bubble-chat-close {
-        background: none;
-        border: none;
-        color: #fff;
-        font-size: 1.5rem;
-        cursor: pointer;
-      }
-      #bubble-chat-content {
-        padding: 16px;
-        min-height: 180px;
-        max-height: 260px;
-        overflow-y: auto;
-        background: #fafafa;
-        text-align: left;
-      }
-      #bubble-chat-form {
-        display: flex;
-        gap: 8px;
-        padding: 12px 16px;
-        border-top: 1px solid #eee;
-        background: #fff;
-      }
-      #bubble-chat-input {
-        flex: 1;
-        border-radius: 8px;
-        border: 1px solid #ddd;
-        padding: 8px 12px;
-      }
-      @media (max-width: 500px) {
-        #bubble-chat-box {
-          right: 8px;
-          width: 98vw;
-        }
-        #bubble-chat-btn {
-          right: 8px;
-        }
-      }
-    </style>
-    <button id="bubble-chat-btn" title="Chat AI">
-      <i class="bi bi-chat-dots"></i>
+
+    <!-- Theme Toggle Button -->
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+      <i class="bi bi-moon-fill"></i>
+      <i class="bi bi-sun-fill"></i>
     </button>
-    <div id="bubble-chat-box">
-      <div id="bubble-chat-header">
-        AI Assistant
-        <button id="bubble-chat-close">&times;</button>
-      </div>
-      <div id="bubble-chat-content"></div>
-      <form id="bubble-chat-form" autocomplete="off">
-        <input
-          type="text"
-          id="bubble-chat-input"
-          placeholder="Type your message..."
-          required
-        />
-        <button type="submit" class="btn btn-primary">Send</button>
-      </form>
-    </div>
+
     <script>
-      // Gemini API key (replace with your own key)
-      const GEMINI_API_KEY = "AIzaSyD1uGyM6rjCvwvXM6O1ndlQ8VFS1YmrRoE";
-      // Bubble chat elements
-      const bubbleBtn = document.getElementById("bubble-chat-btn");
-      const bubbleBox = document.getElementById("bubble-chat-box");
-      const bubbleClose = document.getElementById("bubble-chat-close");
-      const bubbleContent = document.getElementById("bubble-chat-content");
-      const bubbleForm = document.getElementById("bubble-chat-form");
-      const bubbleInput = document.getElementById("bubble-chat-input");
-      // Image URLs
-      const userImg = "image/refa.jpeg";
-      const aiImg = "image/logo.png";
-      let conversation = [];
-      function appendBubbleMessage(sender, text) {
-        const msgDiv = document.createElement("div");
-        msgDiv.style.margin = "10px 0";
-        msgDiv.style.display = "flex";
-        msgDiv.style.alignItems = "flex-start";
-        const fontSize = "1.15rem";
-        if (sender === "You") {
-          msgDiv.style.justifyContent = "flex-end";
-          msgDiv.innerHTML = `
-        <span style="background:#3b82f6;color:#fff;padding:8px 16px;border-radius:16px 0 16px 16px;max-width:70%;display:inline-block;text-align:right;font-size:${fontSize};">
-          ${text}
-        </span>
-        <img src="${userImg}" alt="User" style="width:32px;height:32px;border-radius:50%;margin-left:8px;object-fit:cover;">
-      `;
-        } else {
-          msgDiv.style.justifyContent = "flex-start";
-          msgDiv.innerHTML = `
-        <img src="${aiImg}" alt="AI" style="width:32px;height:32px;border-radius:50%;margin-right:8px;object-fit:cover;">
-        <span style="background:#e5e7eb;color:#222;padding:8px 16px;border-radius:0 16px 16px 16px;max-width:70%;display:inline-block;text-align:left;font-size:${fontSize};">
-          ${text}
-        </span>
-      `;
+      // Theme Toggle Script
+      (function () {
+        const toggle = document.getElementById("themeToggle");
+        const html = document.documentElement;
+        const savedTheme = localStorage.getItem("theme") || "light";
+
+        if (savedTheme === "dark") {
+          html.setAttribute("data-theme", "dark");
         }
-        bubbleContent.appendChild(msgDiv);
-        bubbleContent.scrollTop = bubbleContent.scrollHeight;
-      }
-      async function getGeminiReply(userMsg) {
-        conversation.push({ role: "user", parts: [{ text: userMsg }] });
-        const contents = conversation.map((msg) => ({
-          role: msg.role,
-          parts: msg.parts,
-        }));
-        const url =
-          "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=" +
-          GEMINI_API_KEY;
-        const body = { contents };
-        try {
-          const res = await fetch(url, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(body),
-          });
-          const data = await res.json();
-          if (
-            data &&
-            data.candidates &&
-            data.candidates[0] &&
-            data.candidates[0].content &&
-            data.candidates[0].content.parts[0].text
-          ) {
-            conversation.push({
-              role: "model",
-              parts: [{ text: data.candidates[0].content.parts[0].text }],
-            });
-            return data.candidates[0].content.parts[0].text.replace(
-              /\*\*/g,
-              "",
-            );
-          } else {
-            return "Maaf, saya tidak bisa mendapatkan respon dari AI.";
-          }
-        } catch (err) {
-          return "Maaf, terjadi kesalahan saat menghubungkan ke Gemini API.";
-        }
-      }
-      bubbleBtn.onclick = function () {
-        bubbleBox.style.display = "flex";
-        bubbleBtn.style.display = "none";
-        bubbleInput.focus();
-      };
-      bubbleClose.onclick = function () {
-        bubbleBox.style.display = "none";
-        bubbleBtn.style.display = "flex";
-      };
-      bubbleForm.addEventListener("submit", async function (e) {
-        e.preventDefault();
-        const userMsg = bubbleInput.value.trim();
-        if (!userMsg) return;
-        appendBubbleMessage("You", userMsg);
-        bubbleInput.value = "";
-        appendBubbleMessage("", "Typing...");
-        const aiReply = await getGeminiReply(userMsg);
-        // Remove "Typing..." message
-        const lastMsg = bubbleContent.querySelectorAll("div");
-        if (lastMsg.length) lastMsg[lastMsg.length - 1].remove();
-        appendBubbleMessage("", aiReply);
-      });
+
+        toggle.addEventListener("click", () => {
+          const currentTheme = html.getAttribute("data-theme");
+          const newTheme = currentTheme === "dark" ? "light" : "dark";
+          html.setAttribute("data-theme", newTheme);
+          localStorage.setItem("theme", newTheme);
+        });
+      })();
     </script>
 
-    <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="script.js"></script>
-    <!-- AOS JS -->
+    <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
     <script>
+      // Initialize AOS
+      AOS.init({
+        once: true,
+        duration: 800,
+      });
+
       // Supabase initialization
       const supabaseUrl = "https://swsqdksyabjbafmuxljx.supabase.co";
       const supabaseKey =
@@ -675,113 +641,200 @@
         supabaseKey,
       );
 
-      // Fetch and render Projects (tbl_project)
+      // Typing animation
+      const roles = [
+        "Fullstack Developer",
+        "Front-End Developer",
+        "Back-End Developer",
+        "Mobile Developer",
+      ];
+      let roleIndex = 0;
+      let charIndex = 0;
+      let isDeleting = false;
+      const typingElement = document.querySelector(".role-typing");
+
+      function typeRole() {
+        const currentRole = roles[roleIndex];
+
+        if (isDeleting) {
+          typingElement.textContent = currentRole.substring(0, charIndex - 1);
+          charIndex--;
+        } else {
+          typingElement.textContent = currentRole.substring(0, charIndex + 1);
+          charIndex++;
+        }
+
+        let typeSpeed = isDeleting ? 50 : 100;
+
+        if (!isDeleting && charIndex === currentRole.length) {
+          typeSpeed = 2000;
+          isDeleting = true;
+        } else if (isDeleting && charIndex === 0) {
+          isDeleting = false;
+          roleIndex = (roleIndex + 1) % roles.length;
+          typeSpeed = 500;
+        }
+
+        setTimeout(typeRole, typeSpeed);
+      }
+
+      typeRole();
+
+      // Navigation
+      const navToggle = document.getElementById("nav-toggle");
+      const navMenu = document.getElementById("nav-menu");
+      const navClose = document.getElementById("nav-close");
+      const navLinks = document.querySelectorAll(".nav-link");
+
+      navToggle.addEventListener("click", () => {
+        navMenu.classList.add("show-menu");
+      });
+
+      navClose.addEventListener("click", () => {
+        navMenu.classList.remove("show-menu");
+      });
+
+      navLinks.forEach((link) => {
+        link.addEventListener("click", () => {
+          navMenu.classList.remove("show-menu");
+        });
+      });
+
+      // Active link on scroll
+      const sections = document.querySelectorAll("section[id]");
+
+      function scrollActive() {
+        const scrollY = window.pageYOffset;
+
+        sections.forEach((section) => {
+          const sectionHeight = section.offsetHeight;
+          const sectionTop = section.offsetTop - 100;
+          const sectionId = section.getAttribute("id");
+          const navLink = document.querySelector(
+            `.nav-link[href*="${sectionId}"]`,
+          );
+
+          if (navLink) {
+            if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
+              navLink.classList.add("active");
+            } else {
+              navLink.classList.remove("active");
+            }
+          }
+        });
+      }
+
+      window.addEventListener("scroll", scrollActive);
+
+      // Header scroll effect
+      const header = document.getElementById("header");
+
+      window.addEventListener("scroll", () => {
+        if (window.scrollY > 50) {
+          header.classList.add("scroll-header");
+        } else {
+          header.classList.remove("scroll-header");
+        }
+      });
+
+      // Load Projects
       async function loadProjects() {
         const { data, error } = await supabaseClient
           .from("tbl_project")
           .select("*");
-        console.log("Projects - Data:", data, "Error:", error);
+        console.log("Projects:", data, error);
+
         if (error) {
           console.error("Error loading projects:", error);
           return;
         }
+
         const container = document.getElementById("project-list");
         container.innerHTML = "";
-        data.forEach((project) => {
-          container.innerHTML += `
-                <div class="col-md-8 col-lg-5 mb-4" data-aos="fade-up">
-                    <div class="card h-100">
-                        <img src="${project.foto}" class="card-img-top" alt="${project.nama}" loading="lazy" data-aos="fade-up">
-                        <div class="card-body">
-                            <h5 class="card-title">${project.nama}</h5>
-                            <p class="card-text">${project.keterangan}</p>
-                        </div>
-                    </div>
-                </div>
-                `;
-        });
-        AOS.refresh(); // refresh AOS after DOM update
-      }
 
-      // Fetch and render Gallery (tbl_galeris)
-      async function loadGallery() {
-        const { data, error } = await supabaseClient
-          .from("tbl_galeris")
-          .select("*");
-        console.log("Gallery - Data:", data, "Error:", error);
-        if (error) {
-          console.error("Error loading gallery:", error);
-          return;
-        }
-        const container = document.getElementById("random-gallery");
-        container.innerHTML = "";
-        data.forEach((img) => {
-          const w = Math.floor(Math.random() * (480 - 220 + 1)) + 220;
-          const h = Math.floor(Math.random() * (280 - 160 + 1)) + 160;
+        data.forEach((project, index) => {
           container.innerHTML += `
-                <img src="${img.foto}" alt="Galeri" class="random-img" style="width:${w}px;height:${h}px;object-fit:cover;border-radius:10px;" loading="lazy" data-aos="fade-up">
-                `;
+            <div class="project-card" data-aos="fade-up" data-aos-delay="${index * 100}">
+              <div class="project-img">
+                <img src="${project.foto}" alt="${project.nama}" loading="lazy" />
+                <div class="project-overlay">
+                  <a href="${project.foto}" class="project-view" target="_blank">
+                    <i class="bi bi-eye"></i>
+                  </a>
+                </div>
+              </div>
+              <div class="project-info">
+                <h3 class="project-title">${project.nama}</h3>
+                <p class="project-desc">${project.keterangan}</p>
+              </div>
+            </div>
+          `;
         });
+
         AOS.refresh();
       }
 
-      // Fetch and render Certificates (tbl_certificates)
+      // Load Certificates
       async function loadCertificates() {
         const { data, error } = await supabaseClient
           .from("tbl_certificates")
           .select("*");
-        console.log("Certificates - Data:", data, "Error:", error);
+        console.log("Certificates:", data, error);
+
         const container = document.getElementById("certificate-list");
         container.innerHTML = "";
+
         if (error || !data || data.length === 0) {
-          container.innerHTML = "<p>Tidak ada sertifikat tersedia.</p>";
+          container.innerHTML = "<p>No certificates available.</p>";
           return;
         }
-        data.forEach((cert) => {
+
+        data.forEach((cert, index) => {
           container.innerHTML += `
-            <div class="card" style="text-align: center; padding: 20px; width: 300px;" data-aos="fade-up">
-                <a href="${cert.file}" target="_blank" rel="noopener noreferrer">
-                    <img src="${cert.foto}" alt="${cert.nama}" style="width: 100%; height: auto;" loading="lazy" data-aos="fade-up">
-                </a>
-                <p class="card-title" style="margin-top: 10px;">${cert.nama}</p>
+            <div class="certificate-card" data-aos="fade-up" data-aos-delay="${index * 100}">
+              <a href="${cert.file}" target="_blank" rel="noopener noreferrer">
+                <img src="${cert.foto}" alt="${cert.nama}" loading="lazy" />
+              </a>
+              <h4>${cert.nama}</h4>
             </div>
-        `;
+          `;
         });
+
         AOS.refresh();
       }
 
-      // Call all loaders on page load
+      // Load Gallery
+      async function loadGallery() {
+        const { data, error } = await supabaseClient
+          .from("tbl_galeris")
+          .select("*");
+        console.log("Gallery:", data, error);
+
+        if (error) {
+          console.error("Error loading gallery:", error);
+          return;
+        }
+
+        const container = document.getElementById("random-gallery");
+        container.innerHTML = "";
+
+        data.forEach((img, index) => {
+          container.innerHTML += `
+            <div class="gallery-item" data-aos="zoom-in" data-aos-delay="${index * 50}">
+              <img src="${img.foto}" alt="Gallery" loading="lazy" />
+            </div>
+          `;
+        });
+
+        AOS.refresh();
+      }
+
+      // Load all data
       document.addEventListener("DOMContentLoaded", () => {
-        console.log("DOMContentLoaded fired - Loading data...");
         loadProjects();
         loadCertificates();
         loadGallery();
-        AOS.init({ once: true });
-      });
-
-      // Scroll reveal animation
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("show");
-          }
-        });
-      });
-
-      document.querySelectorAll("section").forEach((section) => {
-        observer.observe(section);
-      });
-
-      //   Randomize gallery image sizes on refresh
-      //   Hapus kode ini karena sudah di-loadGallery
-      document.querySelectorAll(".random-img").forEach((img) => {
-        const size = randomSize(220, 480, 160, 280);
-        img.style.width = size.width + "px";
-        img.style.height = size.height + "px";
-        img.style.objectFit = "cover";
-        img.style.borderRadius = "10px";
       });
     </script>
-    <script src="script-navbar-hide.js"></script>
   </body>
 </html>
