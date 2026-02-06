@@ -1,0 +1,14 @@
+# Robots.txt for Muhammad Refa Fatur Rahman Portfolio
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /private/
+
+# Crawl delay (in seconds)
+Crawl-delay: 1
+
+# Sitemap
+Sitemap: https://refafatur.com/sitemap.xml
+
+# Comment
+# This file tells search engines how to crawl and index the website
