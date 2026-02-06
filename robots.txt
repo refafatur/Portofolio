@@ -8,7 +8,7 @@ Disallow: /private/
 Crawl-delay: 1
 
 # Sitemap
-Sitemap: https://refafatur.com/sitemap.xml
+Sitemap: https://refafatur.github.io/Portofolio/sitemap.xml
 
 # Comment
 # This file tells search engines how to crawl and index the website
